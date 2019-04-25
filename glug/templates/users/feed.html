@@ -12,7 +12,15 @@
     crossorigin="anonymous">
 </head>
 <body>
-  {% csrf_token %}
-  Welcome {{email}}
+<form action="{% url 'users:data_feed' %}" method="post">
+{% csrf_token %}
+feed :
+<input type="text" name="name"><br><br>
+<input type="number" name="verified"><br><br>
+<input type="text" name="l_name"><br><br>
+
+<input type="submit" value="login">
+    
+</form>
 </body>
 </html>

@@ -1,3 +1,7 @@
+{% if msg %}
+<script>alert('{{ msg }}')</script>
+{% endif %}
+
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
@@ -15,24 +19,22 @@
     {% block extrahead %}
 
     {% endblock %}
-
-    <title>events</title>
-
+    <title>glug</title>
     <style>
 
     </style>
-    </head>
-    <body>
-    <header style="position:fixed; width:100%;z-index:999999999;margin-top:0;">
+  </head>
+  <body>
+   <header style="position:fixed; width:100%;z-index:999999999;margin-top:0;">
         {% include "header.html" %}
     </header>
-
-        <h1> THIS IS A EVENTS HOME PAGE</h1>
+        
+        
         {% block body_block %}
         
         {% endblock %}
+        
+   
     
-    
-    
-    </body>
+  </body>
 </html>

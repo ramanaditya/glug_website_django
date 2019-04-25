@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block extrahead %}
+
+    {% endblock %}
+
+    <title>events_result</title>
+
+    <style>
+
+    </style>
+    </head>
+    <body>
+        <h1> THIS IS A EVENTS RESULTS HOME PAGE</h1>
+
+        <form method = "post" enctype="multipart/form-data">
+  {% csrf_token %}
+        <label for="im"></label>
+        <input class="text" type="file" name="im" placeholder="Choose File" required>
+<br><br>
+<button type="submit" class="submit_id" name="image" value="upload" onclick="myFunction()">Upload</button>
+</form>
+
+        {% block body_block %}
+        
+        
+
+        {% endblock %}
+    
+    
+    
+    </body>
+</html>
