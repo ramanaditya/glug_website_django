@@ -9,5 +9,6 @@ urlpatterns = [
 	path('logout/',views.logout,name="logout"),
 	path('register/',views.register,name='register'),
 	path('data_feed/',views.data_feed,name='data_feed'),
+	path('event_create/',views.event_create,name='event_create'),
 	
 ]
