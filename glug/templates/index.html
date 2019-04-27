@@ -25,7 +25,9 @@
     <link rel="stylesheet" href="{% static 'style/aos.css' %}">
 
     <link rel="stylesheet" href="{% static 'style/style.css' %}">
-    
+    {% block extrahead %}
+
+    {% endblock %}
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" >
   
@@ -40,44 +42,11 @@
       <div class="site-mobile-menu-body"></div>
     </div>
    
-    
     <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-      
-      <div class="container-fluid">
-        <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="{% url 'users:index' %}">GLUG</a></div>
-
-          <div class="mx-auto text-center">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="#home-section" class="nav-link">Home</a></li>
-                <li><a href="#courses-section" class="nav-link">Events</a></li>
-                <li><a href="#programs-section" class="nav-link">Programs</a></li>
-                <li><a href="#teachers-section" class="nav-link">Teachers</a></li>
-                <li><a href="#contact-section" class="nav-link"><span>Contact Us</span></a></li>
-              </ul>
-            </nav>
-          </div>
-
-          <div class="ml-auto w-25">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
-                {% if user.registered == True %}
-                <li class="cta dropdown"><a class="" data-toggle="dropdown" href="#" ><span>{{ user.email }} &#8681;</span></a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-link"><a href="{% url 'users:index' %}">Dashboard</a></li>
-                    <li class="nav-link"><a href="{% url 'users:logout' %}">Logout</a></li>
-                  </ul>
-                </li>
-                {% endif %}
-              </ul>
-            </nav>
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
-          </div>
-        </div>
-      </div>
-      
+        {% include "header.html" %}
     </header>
+    
+    
 
     <div class="intro-section" id="home-section">
       
@@ -85,131 +54,190 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-12">
-              <div class="row align-items-center">
+              <div class="row align-items-center"><br><br>
                 <div class="col-lg-6 mb-4">
                   <h1  data-aos="fade-up" data-aos-delay="100">GNU Linux Users Group
                   <p><span class="icon-map-marker"></span>&nbsp; Sir M. Visvesvaraya Institute of Technology</p></h1>
                   <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Open to any free software enthusiasts. This community has been always described as place for learning and sharing, a place to evolve and grow together.</p>
+                  
                   <form action="{% url 'users:index' %}" method="post" class="">
+                  
                   {% csrf_token %}
                   
                     
                   {% if user.registered == False or user_f == False %}
                   
                     {% if value == 2 %}
-                    <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Register Now"/>
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Register Now"/>
                     {% endif %}
                   {% endif %}
                   
                   {% if user.registered == False or user_f == False  %}
                   
+                    {% if value == 1 %}
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Login"/>
+                    {% endif %}
+                  {% endif %}
+                  {% if user.registered == True %}
+                    <p data-aos="fade-up" data-aos-delay="200" >
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project"/>&nbsp;&nbsp;
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-danger py-3 px-3" type="submit" name="sub_mit" value="Create Event"/>
+                    </p>
+                  {% endif %}
+                  </form>
+                </div>
+
+                {% if user_f == False or user.registered == False %}
                   {% if value == 1 %}
-                  <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Login"/>
+                  <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+                    <form action="{% url 'users:register' %}" method="post" class="form-box">
+                    {% csrf_token %}
+                      <h3 class="h4 text-black mb-4">Sign Up</h3>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="Username">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email Addresss">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="Confirm password" placeholder="Confirm Password">
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:register' %}" value="Register Now">
+                      </div>
+                    </form>
+                  </div>
                   {% endif %}
-                  {% endif %}
-                  
-                  {% if user.registered == True %}
-                  {% if value == 3 %}
-                  <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Register Your Event"/>
-                  <!--<input type="text" class="datepicker datepicker-dropdown" name="event_date" value="event_date"><br>-->
-                  {% endif %}
-                  {% endif %}
-                  
-                  {% if user.registered == True %}
-                  {% if value == 4 %}
-                  <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Register your Project"/>
-                  {% endif %}
-                  {% endif %}
-                  </form>
-
-                </div>
-
-                {% if user_f == False or user.registered == False %}
-                
-                {% if value == 1 %}
-                <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
-                  <form action="{% url 'users:register' %}" method="post" class="form-box">
-                  {% csrf_token %}
-                    <h3 class="h4 text-black mb-4">Sign Up</h3>
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="username" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                      <input type="email" class="form-control" name="email" placeholder="Email Addresss">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control" name="password" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control" name="Confirm password" placeholder="Confirm Password">
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:register' %}" value="Register Now">
-                    </div>
-                  </form>
-                </div>
-                {% endif %}
                 {% endif %}
 
                 {% if user_f == False or user.registered == False %}
-                {% if value == 2 %}
-                <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
-                  <form action="{% url 'users:login' %}" method="post" class="form-box">
-                  {% csrf_token %}
-                    <h3 class="h4 text-black mb-4">Login</h3>
-                    <div class="form-group">
-                      <input type="email" class="form-control" name="email" placeholder="Email Addresss">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control" name="password" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:login' %}" value="Login">
-                    </div>
-                  </form>
-                </div>
+                  {% if value == 2 %}
+                  <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+                    <form action="{% url 'users:login' %}" method="post" class="form-box">
+                    {% csrf_token %}
+                      <h3 class="h4 text-black mb-4">Login</h3>
+                      <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email Addresss">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:login' %}" value="Login">
+                      </div>
+                    </form>
+                  </div>
+                  {% endif %}
                 {% endif %}
-                {% endif %}
-                {% if user.registered == True %}
-                {% if value == 4 %}
                 
-                <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
-                  <form action="{% url 'users:login' %}" method="post" class="form-box">
-                    <h3 class="h4 text-black mb-4"></h3>
-                    <div class="form-group">
-                      <img src="/static/images/event_default.jpeg" width="100%" />
-                    </div>
-                    
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:login' %}" value="Register Your Event">
-                    </div>
-                  </form>
 
-                </div>
-                {% endif %}
-                {% endif %}
+            
 
-                {% if user.registered == True %}
-                {% if value == 3 %}
-                <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
-                  <form action="{% url 'users:login' %}" method="post" class="form-box">
-                    <h3 class="h4 text-black mb-4"></h3>
-                    <div class="form-group">
-                      <img src="/static/images/project_default.png" width="100%" />
-                    </div>
-                    <div class="form-group">
-                      <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:login' %}" value="Register your Project">
-                    </div>
-                  </form>
-                </div>
-                {% endif %}
-                {% endif %}
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+      {% if user.registered == True %}
+        {% if value == 3 %}
+
+        <div class="site-section bg-light" id="contact-sections">
+          <div class="container">
+
+            <div class="row justify-content-center">
+              <div class="col-md-7">
+
+
+
+                <h2 class="section-title mb-3">Create Your Event here</h2>
+                <p class="mb-5">The GLUG will let the users register for the team and all the details will be displayed to the event creator. Feel free to create and advertise event with GLUG.</p>
+
+                <form method="post" action="{% url 'users:event_create' %}" data-aos="fade" enctype="multipart/form-data">
+                {% csrf_token %}
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="event_name" class="form-control" placeholder="Name of the Event" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-6 mb-3 mb-lg-0">
+                      Upload a picture related to Event : 
+                    </div>
+                    <div class="col-md-6">
+                      <input type="file" name="img_event" class="form-control" placeholder="Last name">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <div class="col-md-4 mb-3 mb-lg-0">
+                      <input type="text" name="event_date" class="form-control datepicker" placeholder="Click to Select a date" required>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="time" name="event_time" class="form-control" placeholder="Time of the Event" required>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" name="event_venue" class="form-control" placeholder="Venue" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="event_price" class="form-control" placeholder="Registration Fee">
+                    </div>
+                  </div>
+
+                  
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <textarea class="form-control" name="event_details" cols="30" rows="10" placeholder="Write Details ot the Event..."></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="tag" class="form-control" placeholder="Separate all tags by comma">
+                      <p>Tag : App,Web,ML,AI,Data Science,Anything New</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="email" class="form-control" placeholder="{{ user.email }}" disabled/>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="number" name="contact_number" class="form-control" placeholder="Enter the Contact number" >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-6">
+
+                      <input type="submit" class="btn btn-outline-primary py-3 px-5 btn-block value="Create Event">
+                    </div>
+                  </div>
+
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+              {% endif %}
+              {% endif %}
+    
+    
 
     
     <div class="site-section courses-title" id="courses-section">
@@ -229,11 +257,12 @@
             {% for item in event_detail %}
             <div class="course bg-white h-100 align-self-stretch">
               <figure class="m-0">
-                <a href="#"><img src="/static/images/event_reg_default.jpg" alt="Image" class="img-fluid"></a>
+                {% if item.img_event_url %}<a href="#"><img src="{{ item.img_event_url }}" alt="Image" class="img-fluid"></a>{% else %}
+                <a href="#"><img src="/static/images/event_reg_default.jpg" alt="Image" class="img-fluid"></a>{% endif %}
               </figure>
               <div class="course-inner-text py-4 px-4">
                 <span class="course-price">{% if item.event_price > 0%}Rs {{ item.event_price }}{% else %}Free{% endif %}</span>
-                <div class="meta"><span class="icon-clock-o"></span>{{ item.event_date }} {{ item.event_time }}<br>
+                <div class="meta"><span class="icon-clock-o"></span>{{ item.month_str }}{{ item.date }}&nbsp; {{ item.event_time }}<br>
                 <span class="icon-map-marker"></span> {{ item.event_venue }}</div>
                 <h3><a href="#">{{ item.event_name }}</a></h3>
                 <p>{{ item.event_details|truncatewords:20 }}</p>
@@ -760,37 +789,9 @@
       </div>
     </div>
     
-     
+     </div>
     <footer class="footer-section bg-white">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h3>About OneSchool</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro consectetur ut hic ipsum et veritatis corrupti. Itaque eius soluta optio dolorum temporibus in, atque, quos fugit sunt sit quaerat dicta.</p>
-          </div>
-
-          <div class="col-md-3 ml-auto">
-            <h3>Links</h3>
-            <ul class="list-unstyled footer-links">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Courses</a></li>
-              <li><a href="#">Programs</a></li>
-              <li><a href="#">Teachers</a></li>
-            </ul>
-          </div>
-
-          <div class="col-md-4">
-            <h3>Subscribe</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt incidunt iure iusto architecto? Numquam, natus?</p>
-            <form action="#" class="footer-subscribe">
-              <div class="d-flex mb-5">
-                <input type="text" class="form-control rounded-0" placeholder="Email">
-                <input type="submit" class="btn btn-primary rounded-0" value="Subscribe">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      {% include "footer.html" %}
     </footer>
 
   

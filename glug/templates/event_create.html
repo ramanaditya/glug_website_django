@@ -1,0 +1,116 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<div class="site-section bg-light" id="contact-section">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-md-7">
+
+
+            
+            <h2 class="section-title mb-3">Create Your Event here</h2>
+            <p class="mb-5">The GLUG will let the users register for the team and all the details will be displayed to the event creator. Feel free to create and advertise event with GLUG.</p>
+          
+            <form method="post" data-aos="fade">
+              <div class="form-group row">
+                <div class="col-md-6 mb-3 mb-lg-0">
+                  <input type="text" class="form-control" placeholder="First name">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Last name">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <input type="text" class="form-control" placeholder="Subject">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <input type="email" class="form-control" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <textarea class="form-control" id="" cols="30" rows="10" placeholder="Write your message here."></textarea>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  
+                  <input type="submit" class="btn btn-primary py-3 px-5 btn-block btn-pill" value="Send Message">
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="site-section bg-image overlay" style="background-image: url('/static/images/hero_1.jpg');">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+              <div class="col-lg-8 ml-auto" data-aos="fade-up" data-aos-delay="500">
+                  <form action="{% url 'users:event_create' %}" method="post" class="form-box">
+                  {% csrf_token %}
+                  <h3 class="h4 text-black mb-4">Create a Event</h3>
+                  <div class="form-group">
+                      <p>
+                          <label for="tag">Tag : </label>
+                          <select id = "myList" name="tag">
+                          <option value = "ml" name="tag">Machine Learning</option>
+                          <option value = "cs" name="tag">Cyber Security</option>
+                          <option value = "wd" name="tag">Web Development</option>
+                          <option value = "ad" name="tag">App Development</option>
+                          </select>
+                      </p>
+                  </div>
+                  <div class="form-group">
+                      Name of Event : <input type="text" name="event_name" value="">
+                  </div>
+                  <div class="form-group">
+                      Scheduled Date : <input type="datepicker" class="icon-date_range datepicker today disabled" name="event_date">
+                  </div>
+                  <div class="form-group">
+                      Price for Event : <input type="text" name="event_price" value="">
+                  </div>
+                  <div class="form-group">
+                      Scheduled Time : <input type="time" name="event_time" value="">
+                  </div>
+                  <div class="form-group">
+                      Venue : <input type="text" name="event_venue" value="">
+                  </div>
+                  <div class="form-group">Enter the details : 
+                  <textarea name="event_details" value="Details">
+                      
+                    </textarea>
+                  </div>
+
+                  <div class="form-group">
+                      <input type="submit" class="btn btn-primary btn-pill" value="Submit">
+                  </div>
+                  </form>
+              </div>
+              </div>
+              </div>
+              </div>
