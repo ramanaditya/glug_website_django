@@ -3,21 +3,20 @@
 {% block content %}
 
 <div class="intro-section single-cover" id="home-section">
-      
       <div class="slide-1 " style="background-image: url('/static/images/img_2.jpg');" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-12">
               <div class="row justify-content-center align-items-center text-center">
-                <div class="col-lg-6">
-                  <h1 data-aos="fade-up" data-aos-delay="0">Create Your Event here</h1>
+                <div class="col-lg-6"><br>
+                  <h1 data-aos="fade-up" data-aos-delay="0">It's always nice to be updated</h1>
                   <p data-aos="fade-up" data-aos-delay="100">{{ event_detail_count }} Lessons / 12 Week &bullet; 2,193 students &bullet; <a href="#" class="text-white">6 comments</a></p>
                 </div>
-
-                
+              </div>
+              <div class=" text-center">
+              <a href="{% url 'users:dashboard' %}"><input type="submit" class=" btn btn-outline-info text-center" style="align:right;" name="ev_submit" value=" Dashboard " /></a>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -25,86 +24,68 @@
 
 <div class="site-section bg-light" id="event_create_section">
           <div class="container">
-
             <div class="row justify-content-center">
               <div class="col-md-7">
-
-
-
-                <h2 class="section-title mb-3"></h2>
-                <p class="mb-5">The GLUG will let the users register for the event and all the details will be displayed to the event organizer. Feel free to create and advertise event with GLUG.</p>
-
+                <h2 class="section-title mb-3 text-center">Edit your Dashboard</h2>
+                <p class="mb-5"></p>
                 <form method="post" action="{% url 'users:event_create' %}" data-aos="fade" enctype="multipart/form-data">
                 {% csrf_token %}
                   <div class="form-group row">
-                    <div class="col-md-12">
-                      <input type="text" name="event_name" class="form-control" placeholder="Name of the Event" required>
+                    <div class="col-md-6 mb-3 mb-lg-0">
+                      <input type="text" class="form-control" name="first_name" placeholder="First name">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" name="last_name" placeholder="Last name">
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-md-6 mb-3 mb-lg-0">
-                      Upload a picture related to Event : 
+                      Upload Your Profile Picture : 
                     </div>
                     <div class="col-md-6">
-                      <input type="file" name="img_event" class="form-control" placeholder="">
+                      <input type="file" name="dp" class="form-control" placeholder="">
                     </div>
                   </div>
-                  
                   <div class="form-group row">
                     <div class="col-md-4 mb-3 mb-lg-0">
-                      <input type="text" name="event_date" class="form-control datepicker" placeholder="Click to Select a date" >
+                      <input type="text" name="dob" class="form-control datepicker" placeholder="Date of Birth" >
                     </div>
                     <div class="col-md-4">
-                      <input type="text" name="event_time" class="form-control" placeholder="Time of the Event" >
+                      <input type="text" name="usn" class="form-control" placeholder="Enter your USN" >
                     </div>
                     <div class="col-md-4">
-                      <input type="text" name="event_venue" class="form-control" placeholder="Venue" >
+                      <input type="text" name="sem" class="form-control" placeholder="Enter your Sem" >
                     </div>
                   </div>
-
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <input type="text" name="event_price" class="form-control" placeholder="Registration Fee" required>
+                      <textarea class="form-control" name="desc" cols="30" rows="10" placeholder="Describe Yourself"></textarea>
                     </div>
                   </div>
-
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <input type="text" name="event_headline" class="form-control" placeholder="Brief headline to be displayed... in 100 words" maxlength="100" required>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <textarea class="form-control" name="event_details" cols="30" rows="10" placeholder="Write Details ot the Event..."></textarea>
-                    </div>
-                  </div>
+                  <!--
                   <div class="form-group row">
                     <div class="col-md-12">
                       <input type="text" name="tag" class="form-control" placeholder="Tags : Separate all tags by comma">
                       <p>Tag : App,Web,ML,AI,Data Science,Anything New</p>
                     </div>
-                  </div>
+                  </div>-->
 
                   <div class="form-group row">
                     <div class="col-md-12">
                       <input type="email" class="form-control" placeholder="{{ user.email }}" disabled/>
                     </div>
                   </div>
-                  
                   <div class="form-group row">
                     <div class="col-md-12">
                       <input type="number" name="contact_number" class="form-control" placeholder="Enter the Contact number" required>
                     </div>
                   </div>
-
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <input type="submit" class="btn btn-outline-primary py-3 px-6 ml-auto " value="Create Event">&nbsp;&nbsp;&nbsp;
+                      <input type="submit" class="btn btn-outline-primary py-3 px-6 ml-auto " value="Submit">&nbsp;&nbsp;&nbsp;
                       <a href="{% url 'users:cancel' %}"><input target="" type="button" class="btn btn-outline-danger py-3 px-6 nl-auto" value="Cancel"></a>
                     </div>
                   </div>
-
                 </form>
                 </div>
               </div>

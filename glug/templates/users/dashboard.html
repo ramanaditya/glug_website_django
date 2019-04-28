@@ -10,11 +10,14 @@
             <div class="col-12">
               <div class="row justify-content-center align-items-center text-center">
                 <div class="col-lg-6">
-                  <h1 data-aos="fade-up" data-aos-delay="0">Create Your Event here</h1>
+                  <h1 data-aos="fade-up" data-aos-delay="0">Hi, Welcome {{ user.email }}</h1>
                   <p data-aos="fade-up" data-aos-delay="100">{{ event_detail_count }} Lessons / 12 Week &bullet; 2,193 students &bullet; <a href="#" class="text-white">6 comments</a></p>
                 </div>
-
                 
+                
+              </div>
+              <div class=" text-center">
+              <a href="{% url 'users:dashboard_edit' %}"><input type="submit" class=" btn btn-outline-info text-center" style="align:right;" name="ev_submit" value=" Edit Your Profile " /></a>
               </div>
             </div>
             
@@ -32,9 +35,9 @@
 
 
                 <h2 class="section-title mb-3"></h2>
-                <p class="mb-5">The GLUG will let the users register for the event and all the details will be displayed to the event organizer. Feel free to create and advertise event with GLUG.</p>
+                <p class="mb-5"></p>
 
-                <form method="post" action="{% url 'users:event_create' %}" data-aos="fade" enctype="multipart/form-data">
+                <form method="post" action="{% url 'users:dashboard' %}" data-aos="fade" enctype="multipart/form-data">
                 {% csrf_token %}
                   <div class="form-group row">
                     <div class="col-md-12">
@@ -43,7 +46,7 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-md-6 mb-3 mb-lg-0">
-                      Upload a picture related to Event : 
+                      Upload your picture : 
                     </div>
                     <div class="col-md-6">
                       <input type="file" name="img_event" class="form-control" placeholder="">
@@ -104,14 +107,10 @@
                       <a href="{% url 'users:cancel' %}"><input target="" type="button" class="btn btn-outline-danger py-3 px-6 nl-auto" value="Cancel"></a>
                     </div>
                   </div>
-
                 </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
-
 {% endblock %}

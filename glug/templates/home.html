@@ -1,0 +1,793 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+    <div class="intro-section" id="home-section">
+      
+      <div class="slide-1" style="background-image: url('/static/images/hero_1.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="row align-items-center"><br><br>
+                <div class="col-lg-6 mb-4">
+                  <h1  data-aos="fade-up" data-aos-delay="100">GNU Linux Users Group
+                  <p><span class="icon-map-marker"></span>&nbsp; Sir M. Visvesvaraya Institute of Technology</p></h1>
+                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200">Open to any free software enthusiasts. This community has been always described as place for learning and sharing, a place to evolve and grow together.</p>
+                  
+                  <form action="{% url 'users:home' %}" method="post" class="">
+                  
+                  {% csrf_token %}
+                  
+                    
+                  {% if user.registered == False or user_f == False %}
+                  
+                    {% if value == 2 %}
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Register Now"/>
+                    {% endif %}
+                  {% endif %}
+                  
+                  {% if user.registered == False or user_f == False  %}
+                  
+                    {% if value == 1 %}
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Login"/>
+                    {% endif %}
+                  {% endif %}
+                  </form>
+                  {% if user.registered == True %}
+                    <p data-aos="fade-up" data-aos-delay="200" >
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project"/>&nbsp;&nbsp;
+                      <a href="{% url 'users:event_create' %}"><input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-danger py-3 px-3" type="" name="sub_mit" target="{% url 'users:event_create' %}" value="Create Event" onclick="document.getElementById( 'event_create_section' ).scrollIntoView();" /></a>
+                    </p>
+                  {% endif %}
+                  
+                </div>
+
+                {% if user_f == False or user.registered == False %}
+                  {% if value == 1 %}
+                  <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+                    <form action="{% url 'users:register' %}" method="post" class="form-box">
+                    {% csrf_token %}
+                      <h3 class="h4 text-black mb-4">Sign Up</h3>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="Username">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email Addresss">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="Confirm password" placeholder="Confirm Password">
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:register' %}" value="Register Now">
+                      </div>
+                    </form>
+                  </div>
+                  {% endif %}
+                {% endif %}
+
+                {% if user_f == False or user.registered == False %}
+                  {% if value == 2 %}
+                  <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+                    <form action="{% url 'users:login' %}" method="post" class="form-box">
+                    {% csrf_token %}
+                      <h3 class="h4 text-black mb-4">Login</h3>
+                      <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email Addresss">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:login' %}" value="Login">
+                      </div>
+                    </form>
+                  </div>
+                  {% endif %}
+                {% endif %}
+                
+
+            
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+      {% if user.registered == True %}
+        {% if value == 3 %}
+
+        <div class="site-section bg-light" id="event_create_section">
+          <div class="container">
+
+            <div class="row justify-content-center">
+              <div class="col-md-7">
+
+
+
+                <h2 class="section-title mb-3">Create Your Event here</h2>
+                <p class="mb-5">The GLUG will let the users register for the event and all the details will be displayed to the event organizer. Feel free to create and advertise event with GLUG.</p>
+
+                <form method="post" action="{% url 'users:event_create' %}" data-aos="fade" enctype="multipart/form-data">
+                {% csrf_token %}
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="event_name" class="form-control" placeholder="Name of the Event" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-6 mb-3 mb-lg-0">
+                      Upload a picture related to Event : 
+                    </div>
+                    <div class="col-md-6">
+                      <input type="file" name="img_event" class="form-control" placeholder="">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <div class="col-md-4 mb-3 mb-lg-0">
+                      <input type="text" name="event_date" class="form-control datepicker" placeholder="Click to Select a date" >
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" name="event_time" class="form-control" placeholder="Time of the Event" >
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" name="event_venue" class="form-control" placeholder="Venue" >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="event_price" class="form-control" placeholder="Registration Fee" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="event_headline" class="form-control" placeholder="Brief headline to be displayed... in 100 words" maxlength="100" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <textarea class="form-control" name="event_details" cols="30" rows="10" placeholder="Write Details ot the Event..."></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="tag" class="form-control" placeholder="Tags : Separate all tags by comma">
+                      <p>Tag : App,Web,ML,AI,Data Science,Anything New</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="email" class="form-control" placeholder="{{ user.email }}" disabled/>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="number" name="contact_number" class="form-control" placeholder="Enter the Contact number" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="submit" class="btn btn-outline-primary py-3 px-6 ml-auto " value="Create Event">&nbsp;&nbsp;&nbsp;
+                      <a href="{% url 'users:cancel' %}"><input target="" type="button" class="btn btn-outline-danger py-3 px-6 nl-auto" value="Cancel"></a>
+                    </div>
+                  </div>
+
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+              {% endif %}
+              {% endif %}
+    
+    
+
+    
+    <div class="site-section courses-title" id="courses-section">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
+            <h2 class="section-title">Upcoming Events</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100">
+      <div class="container">
+        <div class="row">
+
+          <div class="owl-carousel col-12 nonloop-block-14">
+            {% for item in event_detail %}
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                {% if item.img_event_url %}<a href="#"><img src="{{ item.img_event_url }}" alt="Image" class="img-fluid" style="min-height:145px;max-height:145px;z-index:-1;"></a>{% else %}
+                <a href="#"><img src="/static/images/event_reg_default.jpg" alt="Image" class="img-fluid"></a>{% endif %}
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">{% if item.event_price > 0%}Rs {{ item.event_price }}{% else %}Free{% endif %}</span>
+                <div class="meta"><span class="icon-clock-o"></span>{{ item.month_str }}&nbsp;{{ item.date }}&nbsp;,{{ item.year}} &nbsp;&nbsp; {{ item.event_time }}<br>
+                <span class="icon-map-marker"></span> {{ item.event_venue }}</div>
+                <h3><a href="#">{{ item.event_name }}</a></h3>
+                <p>{{ item.event_details|truncatechars:70 }}</p>
+              </div>
+              <div class="d-flex border-top stats">
+                <div class="py-3 px-4"><span class="icon-flag-checkered"></span> {{ item.tag }}</div>
+                <div class="py-3 px-4 ml-auto"><a href="mailto:{{ item.created_by }}?Subject=Regarding%20the%20Event%20{{item.event_name}}&body=Hi,%20I%20am%20{{ user.email }}%0AI%20get%20to%20know%20about%20{{ item.event_name }}%20on%20GLUG%20Website%0A%0A%0A%0A"<span class="icon-envelope-o"></span></a>&nbsp;&nbsp;&nbsp;<a href="callto:{{ item.contact_number }}"<span class="icon-phone2"></span></a></div>
+              </div>
+              <div class="d-flex border-top stats">
+                <form action="{% url 'users:event_apply' %}" method="post" class="">
+                  {% csrf_token %}
+                  <input type="number" name="year" value="{{ item.year }}" hidden/>
+                  <input type="number" name="month" value="{{ item.month }}" hidden/>
+                  <input type="number" name="date" value="{{ item.date }}" hidden/>
+                  <input type="text" name="event_name" value="{{ item.event_name }}" hidden/>
+                  <input type="text" name="event_venue" value="{{ item.event_venue }}" hidden/>
+                  <input type="number" name="contact_number" value="{{ item.contact_number }}" hidden/>
+                  <input type="text" name="created_at" value="{{ item.created_at }}" hidden/>
+                  <input type="text" name="created_by" value="{{ item.created_by }}" hidden/>
+                  <input type="text" name="event_details" value="{{ item.event_details }}" hidden/>
+                  <input type="text" name="event_headline" value="{{ item.event_headline }}" hidden/>
+                  <input type="text" name="event_price" value="{{ item.event_price }}" hidden/>
+                  <input type="text" name="event_time" value="{{ item.event_time }}" hidden/>
+                  <input type="text" name="img_event_url" value="{{ item.img_event_url }}" hidden/>
+                  <input type="text" name="month_str" value="{{ item.month_str }}" hidden/>
+                  <input type="text" name="tag" value="{{ item.tag }}" hidden/>
+                  
+                    <!--<div class="py-3 px-4"><span class="btn btn-outline-info">More Info</span></div></a>-->
+                    <div class="py-3 px-4">
+                        <input type="submit" class="btn btn-outline-info" name="ev_submit" value="info" />
+                        <input type="submit" class=" btn btn-outline-danger" style="align:right;" name="ev_submit" value="Apply" />
+                    </div>
+                </form>
+              </div>
+            </div>
+            {% endfor %}
+            
+
+          </div>
+
+         
+
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-7 text-center">
+            <button class="customPrevBtn btn btn-primary m-1">Prev</button>
+            <button class="customNextBtn btn btn-primary m-1">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section bg-image overlay" style="background-image: url('/static/images/hero_1.jpg');">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-8 text-center testimony">
+            <img src="/static/images/Aaron_Swartz.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+            <h3 class="mb-4">Aaron Swartz</h3>
+            <blockquote>
+              <p>&ldquo; Information is power. But like all power, there are those who want to keep it for themselves. &rdquo;</p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="site-section courses-title" id="courses-section">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="5000">
+            <h2 class="section-title">Open Source Projects</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="500">
+      <div class="container">
+        <div class="row">
+
+          <div class="owl-carousel col-12 nonloop-block-14">
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="#"><img src="/static/images/img_1.jpg" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">$20</span>
+                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
+                <h3><a href="#">Study Law of Physics</a></h3>
+                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
+              </div>
+              <div class="d-flex border-top stats">
+                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
+                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
+              </div>
+            </div>
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="#"><img src="/static/images/img_2.jpg" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">$99</span>
+                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
+                <h3><a href="#">Logo Design Course</a></h3>
+                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
+              </div>
+              <div class="d-flex border-top stats">
+                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
+                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
+              </div>
+            </div>
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="#"><img src="/static/images/img_3.jpg" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">$99</span>
+                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
+                <h3><a href="#">JS Programming Language</a></h3>
+                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
+              </div>
+              <div class="d-flex border-top stats">
+                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
+                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
+              </div>
+            </div>
+
+
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="#"><img src="/static/images/img_4.jpg" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">$20</span>
+                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
+                <h3><a href="#">Study Law of Physics</a></h3>
+                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
+              </div>
+              <div class="d-flex border-top stats">
+                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
+                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
+              </div>
+            </div>
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="#"><img src="/static/images/img_5.jpg" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">$99</span>
+                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
+                <h3><a href="#">Logo Design Course</a></h3>
+                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
+              </div>
+              <div class="d-flex border-top stats">
+                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
+                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
+              </div>
+            </div>
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="#"><img src="/static/images/img_6.jpg" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <span class="course-price">$99</span>
+                <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div>
+                <h3><a href="#">JS Programming Language</a></h3>
+                <p>Lorem ipsum dolor sit amet ipsa nulla adipisicing elit. </p>
+              </div>
+              <div class="d-flex border-top stats">
+                <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
+                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div>
+              </div>
+            </div>
+
+          </div>
+
+         
+
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-7 text-center">
+            <button class="customPrevBtn btn btn-primary m-1">Prev</button>
+            <button class="customNextBtn btn btn-primary m-1">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section" id="programs-section">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 text-center"  data-aos="fade-up" data-aos-delay="">
+            <h2 class="section-title">Our Programs</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
+          </div>
+        </div>
+        <div class="row mb-5 align-items-center">
+          <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
+            <img src="/static/images/undraw_youtube_tutorial.svg" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-black mb-4">We Are Excellent In Education</h2>
+            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+
+            <div class="d-flex align-items-center custom-icon-wrap mb-3">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+              <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row mb-5 align-items-center">
+          <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+            <img src="/static/images/undraw_teaching.svg" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-black mb-4">Strive for Excellent</h2>
+            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+
+            <div class="d-flex align-items-center custom-icon-wrap mb-3">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+              <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row mb-5 align-items-center">
+          <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
+            <img src="/static/images/undraw_teacher.svg" alt="Image" class="img-fluid">
+          </div>
+          <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-black mb-4">Education is life</h2>
+            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+
+            <div class="d-flex align-items-center custom-icon-wrap mb-3">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+            </div>
+
+            <div class="d-flex align-items-center custom-icon-wrap">
+              <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+              <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+<br><br><br><br>
+    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="500">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 mb-5 text-center"  data-aos="fade-up" data-aos-delay="">
+            <h2 class="section-title">Our Team</h2>
+            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
+          </div>
+        </div>
+        
+        <div class="row" data-aos="fade-up" data-aos-delay="500">
+          <div class="owl-carousel col-12 nonloop-block-14">
+            <div class="course bg-white h-100 align-self-stretch">
+              <div class="teacher text-center">
+                <img src="https://avatars3.githubusercontent.com/u/29686866?s=400&v=4" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+                <div class="py-2">
+                  <h3 class="text-black">Abhijit Singh</h3>
+                  <p class="position">GLUG Member</p>
+                  <span style="font-size:30px;">
+                    <a href="https://www.linkedin.com/in/thatniceman/">
+                      <span class="icon-linkedin-square"></span>
+                    </a>&nbsp;
+                    <a href="https://github.com/cseas">
+                      <span class="icon-github"></span>
+                    </a>
+                  </span>
+                  <p>Neighbourhood friendly Software Engineer
+GLUG Lead | Microsoft Student Partner | AI Developer</p>
+                </div>
+              </div>
+            </div>
+
+
+            
+            <div class="course bg-white h-100 align-self-stretch">
+              <div class="teacher text-center">
+                <img src="https://avatars0.githubusercontent.com/u/30434974?s=400&v=4" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+                <div class="py-2">
+                  <h3 class="text-black">Vipul Gaurav</h3>
+                  <p class="position">GLUG Member</p>
+                  <span style="font-size:30px;">
+                    <a href="https://www.linkedin.com/in/vipul-gaurav/">
+                      <span class="icon-linkedin-square"></span>
+                    </a>&nbsp;
+                    <a href="https://github.com/vgaurav3011">
+                      <span class="icon-github"></span>
+                    </a>
+                  </span>
+                  
+                  <p></p>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <div class="teacher text-center">
+                <img src="https://avatars2.githubusercontent.com/u/32497523?s=400&u=f9085eb93ba74f3d95e0738e2ed1ca4488298fae&v=4" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+                <div class="py-2">
+                  <h3 class="text-black">Aditya Raman</h3>
+                  <p class="position">GLUG Member</p>
+                  <span style="font-size:30px;">
+                    <a href="https://www.linkedin.com/in/ramanaditya/">
+                      <span class="icon-linkedin-square"></span>
+                    </a>&nbsp;
+                    <a href="https://github.com/ramanaditya">
+                      <span class="icon-github"></span>
+                    </a>
+                  </span>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <div class="teacher text-center">
+                <img src="https://avatars1.githubusercontent.com/u/37652114?s=400&v=4" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+                <div class="py-2">
+                  <h3 class="text-black">Arsh Deep</h3>
+                  <p class="position">GLUG Member</p>
+                  <span style="font-size:30px;">
+                    <a href="https://www.linkedin.com/in/arsh-deep-60140816a/">
+                      <span class="icon-linkedin-square"></span>&nbsp;
+                    </a>
+                    <a href="https://github.com/ar1998">
+                      <span class="icon-github"></span>
+                    </a>
+                  </span>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+
+
+            
+
+            
+          </div>
+
+         
+        </div>
+        </div>
+
+
+
+
+
+
+    <!--<div class="site-section" id="teachers-section">
+      <div class="container">
+
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 mb-5 text-center"  data-aos="fade-up" data-aos-delay="">
+            <h2 class="section-title">Our Team</h2>
+            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
+          </div>
+        </div>
+        
+
+        <div class="row">
+          <div class="owl-carousel col-12 nonloop-block-14">
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="teacher text-center">
+              <img src="https://avatars3.githubusercontent.com/u/29686866?s=400&v=4" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+              <div class="py-2">
+                <h3 class="text-black">Abhijit Singh</h3>
+                <p class="position">Physics Teacher</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto tempora, adipisci at provident.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="teacher text-center">
+              <img src="https://avatars2.githubusercontent.com/u/32497523?s=400&u=f9085eb93ba74f3d95e0738e2ed1ca4488298fae&v=4" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+              <div class="py-2">
+                <h3 class="text-black">Aditya Raman</h3>
+                <p class="position">Physics Teacher</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto tempora, adipisci at provident.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="teacher text-center">
+              <img src="https://avatars1.githubusercontent.com/u/37652114?s=400&v=4" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
+              <div class="py-2">
+                <h3 class="text-black">Arsh Deep</h3>
+                <p class="position">Physics Teacher</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto tempora, adipisci at provident.</p>
+              </div>
+            </div>
+          </div>
+
+          
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+    <div class="site-section bg-image overlay" style="background-image: url('/static/images/hero_1.jpg');">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-8 text-center testimony">
+            <img src="/static/images/Aaron_Swartz.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+            <h3 class="mb-4">Aaron Swartz</h3>
+            <blockquote>
+              <p><span class="icon-quote-left"></span> Information is power. But like all power, there are those who want to keep it for themselves. <span class="icon-quote-right"></p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section pb-0">
+
+      <div class="future-blobs">
+        <div class="blob_2">
+          <img src="/static/images/blob_2.svg" alt="Image">
+        </div>
+        <div class="blob_1">
+          <img src="/static/images/blob_1.svg" alt="Image">
+        </div>
+      </div>
+      <div class="container">
+        <div class="row mb-5 justify-content-center" data-aos="fade-up" data-aos-delay="">
+          <div class="col-lg-7 text-center">
+            <h2 class="section-title">Why Choose Us</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 ml-auto align-self-start"  data-aos="fade-up" data-aos-delay="100">
+
+            <div class="p-4 rounded bg-white why-choose-us-box">
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span></div>
+                <div><h3 class="m-0">Easy Event Registration</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span></div>
+                <div><h3 class="m-0">Frequent Updates</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span></div>
+                <div><h3 class="m-0">Look for the topics you prefer</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span></div>
+                <div><h3 class="m-0">Write your own blogs</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light mb-3">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-graduation-cap"></span></span></div>
+                <div><h3 class="m-0">Open Source Projects</h3></div>
+              </div>
+
+              <div class="d-flex align-items-center custom-icon-wrap custom-icon-light">
+                <div class="mr-3"><span class="custom-icon-inner"><span class="icon icon-university"></span></span></div>
+                <div><h3 class="m-0">Everything at one place</h3></div>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="col-lg-7 align-self-end"  data-aos="fade-left" data-aos-delay="200">
+            <img src="/static/images/person_transparent.png" alt="Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="site-section bg-light" id="contact-section">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-md-7">
+
+
+            
+            <h2 class="section-title mb-3">Message Us</h2>
+            <p class="mb-5">Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p>
+          
+            <form method="post" data-aos="fade">
+              <div class="form-group row">
+                <div class="col-md-6 mb-3 mb-lg-0">
+                  <input type="text" class="form-control" placeholder="First name">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Last name">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <input type="text" class="form-control" placeholder="Subject">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <input type="email" class="form-control" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <textarea class="form-control" id="" cols="30" rows="10" placeholder="Write your message here."></textarea>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-6">
+                  
+                  <input type="submit" class="btn btn-primary py-3 px-5 btn-block btn-pill" value="Send Message">
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+     </div>
+    
+  
+  
+{% endblock content %}
