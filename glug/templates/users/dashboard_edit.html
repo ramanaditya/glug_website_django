@@ -10,7 +10,7 @@
               <div class="row justify-content-center align-items-center text-center">
                 <div class="col-lg-6"><br>
                   <h1 data-aos="fade-up" data-aos-delay="0">It's always nice to be updated</h1>
-                  <p data-aos="fade-up" data-aos-delay="100">{{ event_detail_count }} Lessons / 12 Week &bullet; 2,193 students &bullet; <a href="#" class="text-white">6 comments</a></p>
+                  <p data-aos="fade-up" data-aos-delay="100">  Lessons / 12 Week &bullet; 2,193 students &bullet; <a href="#" class="text-white">6 comments</a></p>
                 </div>
               </div>
               <div class=" text-center">
@@ -28,7 +28,7 @@
               <div class="col-md-7">
                 <h2 class="section-title mb-3 text-center">Edit your Dashboard</h2>
                 <p class="mb-5"></p>
-                <form method="post" action="{% url 'users:event_create' %}" data-aos="fade" enctype="multipart/form-data">
+                <form method="post" action="{% url 'users:dashboard_edit' %}" data-aos="fade" enctype="multipart/form-data">
                 {% csrf_token %}
                   <div class="form-group row">
                     <div class="col-md-6 mb-3 mb-lg-0">

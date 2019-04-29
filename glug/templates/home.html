@@ -199,7 +199,8 @@
               {% endif %}
     
     
-
+    {% if event_detail == NULL or event_detail == None %}
+    {% else %}
     
     <div class="site-section courses-title" id="courses-section">
       <div class="container">
@@ -275,6 +276,8 @@
         </div>
       </div>
     </div>
+
+    {% endif %}
 
     <div class="site-section bg-image overlay" style="background-image: url('/static/images/hero_1.jpg');">
       <div class="container">
