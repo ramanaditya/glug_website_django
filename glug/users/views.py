@@ -97,6 +97,7 @@ def home(request):
         }
         event_detail_count = 0
         event_reg_can_count = 0
+        event_reg_can = 0
     if request.method == "POST":
         value = request.POST.get('sub_mit')
         try:
@@ -162,6 +163,7 @@ def login(request):
             print(message)
             return HttpResponseRedirect("/users", {'msg': message})
     else:
+        print("Not login")
         return HttpResponseRedirect("/users")
 
 
@@ -254,8 +256,8 @@ def event_create(request):
 
     else:
         user = request.session['user']
-        event_detail = request.session['event_detail']
-        return render(request, 'event_create.html', {'user': user, 'event_detail': event_detail})
+        #event_detail = request.session['event_detail']
+        return render(request, 'event_create.html', {'user': user})
 
 
 #logout view
@@ -285,7 +287,7 @@ def event_apply(request):
         if(ev_submit == "Apply"):
             user = request.session['user']
             email = user['email']
-            event_detail = request.session['event_detail']
+            '''event_detail = request.session['event_detail']
             user_db = db.child('users_profile').get()
             user_list = []
             users_profiel = []
@@ -294,7 +296,7 @@ def event_apply(request):
             print(user_list)
             for person in user_list:
                 users_profile.append(person)
-            print(users_profile)
+            #print(users_profile)'''
             data = {
                 'email': user['email'],
                 'diplayName': user['displayName'],
