@@ -26,7 +26,7 @@ config = {
     'projectId': "glugmvit-web",
     'storageBucket': "glugmvit-web.appspot.com",
     'messagingSenderId': "198252493",
-    'serviceAccount': serviceAccount,
+    'serviceAccount': "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json",
 }
 firebase = pyrebase.initialize_app(config)
 authe = firebase.auth()
