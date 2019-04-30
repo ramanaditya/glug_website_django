@@ -21,7 +21,32 @@
                 
               </div>
               <div class=" text-center">
-              <input type="submit" class=" btn btn-danger text-center" style="align:right;" name="ev_submit" value=" A p p l y " />
+              
+              <form action="{% url 'users:event_apply' %}" method="post" class="">
+                  {% csrf_token %}
+                  <input type="number" name="year" value="{{ year }}" hidden>
+                  <input type="number" name="month" value="{{ month }}" hidden>
+                  <input type="number" name="date" value="{{ date }}" hidden>
+                  <input type="text" name="event_name" value="{{ event_name }}" hidden>
+                  
+                  
+                    <!--<div class="py-3 px-4"><span class="btn btn-outline-info">More Info</span></div></a>-->
+                    <div class="py-3 px-4">
+                        
+                      
+                        {% if found == 1  %}
+                        
+                        <input type="button" class=" btn btn-danger" style="align:right;" name="submit" value="Applied" disabled/>
+                        
+                        {% else %}
+                        <input type="submit" class=" btn btn-outline-danger" style="align:right;" name="submit" value="Apply" />
+                        {% endif %}
+                        
+                        
+                    </div>
+                </form>
+              
+              
               </div>
             </div>
             

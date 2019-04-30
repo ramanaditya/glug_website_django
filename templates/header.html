@@ -23,7 +23,7 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
                 {% if user.registered == True %}
-                <li class="cta dropdown"><a class="" data-toggle="dropdown" href="#" ><span>{{ user.email }} &#8681;</span></a>
+                <li class="cta dropdown"><a class="" data-toggle="dropdown" href="#" ><span>{{ user.username }} &#8681;</span></a>
                   <ul class="dropdown-menu">
                     <li class="nav-link"><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
                     <li class="nav-link"><a href="{% url 'users:logout' %}">Logout</a></li>

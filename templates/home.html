@@ -1,4 +1,10 @@
 {% extends "index.html" %}
+{% if msg %}
+<script>
+  alert("{{ msg }}");
+</script>
+{% endif %}
+
 {% load static %}
 {% block content %}
     <div class="intro-section" id="home-section">
@@ -21,8 +27,8 @@
                   {% if user.registered == False or user_f == False %}
                   
                     {% if value == 2 %}
-                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="submit" name="sub_mit" value="Register Now"/>
-                    {% endif %}
+                      <a href="{% url 'users:register' %}"><input data-aos="fade-up" data-aos-delay="300" class="btn btn-primary py-3 px-5 btn-pill" type="button" name="" value="Register Now"/></a>
+                    {% endif %} 
                   {% endif %}
                   
                   {% if user.registered == False or user_f == False  %}
@@ -54,8 +60,12 @@
                         <input type="email" class="form-control" name="email" placeholder="Email Addresss">
                       </div>
                       <div class="form-group">
+                        <input type="number" class="form-control" name="contact_number" placeholder="Contact Number">
+                      </div>
+                      <div class="form-group">
                         <input type="password" class="form-control" name="password" placeholder="Password">
                       </div>
+                      <p style="color:red;">Alphanumeric Characters atleast 6 letters</p>
                       <div class="form-group">
                         <input type="password" class="form-control" name="Confirm password" placeholder="Confirm Password">
                       </div>
@@ -234,7 +244,7 @@
                 <div class="py-3 px-4 ml-auto"><a href="mailto:{{ item.created_by }}?Subject=Regarding%20the%20Event%20{{item.event_name}}&body=Hi,%20I%20am%20{{ user.email }}%0AI%20get%20to%20know%20about%20{{ item.event_name }}%20on%20GLUG%20Website%0A%0A%0A%0A"<span class="icon-envelope-o"></span></a>&nbsp;&nbsp;&nbsp;<a href="callto:{{ item.contact_number }}"<span class="icon-phone2"></span></a></div>
               </div>
               <div class="d-flex border-top stats">
-                <form action="{% url 'users:event_apply' %}" method="post" class="">
+                <form action="{% url 'users:info' %}" method="post" class="">
                   {% csrf_token %}
                   <input type="number" name="year" value="{{ item.year }}" hidden/>
                   <input type="number" name="month" value="{{ item.month }}" hidden/>
@@ -255,7 +265,8 @@
                     <!--<div class="py-3 px-4"><span class="btn btn-outline-info">More Info</span></div></a>-->
                     <div class="py-3 px-4">
                         <input type="submit" class="btn btn-outline-info" name="ev_submit" value="info" />
-                        <input type="submit" class=" btn btn-outline-danger" style="align:right;" name="ev_submit" value="Apply" />
+                        
+                        
                     </div>
                 </form>
               </div>
