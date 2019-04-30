@@ -2,6 +2,7 @@
 import os
 import sys
 from google.cloud.bigquery.client import Client
+from google.oauth2 import service_account
 
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'glug.settings')
