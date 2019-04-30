@@ -1,0 +1,76 @@
+{% extends "index.html" %}
+{% if msg %}
+<script>
+  alert("{{ msg }}");
+</script>
+{% endif %}
+
+{% load static %}
+{% block content %}
+
+<div class="intro-section single-cover" id="home-section">
+      <div class="slide-1 " style="background-image: url('/static/images/img_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="row justify-content-center align-items-center text-center">
+                <div class="col-lg-6"><br>
+                  <h1 data-aos="fade-up" data-aos-delay="0">Welcome to our Portal</h1>
+                  <p data-aos="fade-up" data-aos-delay="100"> Register Now and be <a href="#" class="text-white"> updated</a></p>
+                </div>
+              </div>
+              <div class=" text-center">
+              <a href="{% url 'users:login' %}"><input data-aos="fade-up" data-aos-delay="100" type="submit" class=" btn btn-outline-info text-center" style="align:right;" name="ev_submit" value=" L o g i n " /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="site-section bg-light" id="event_create_section">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <h2 class="section-title mb-3 text-center">Sign Up</h2>
+                <p class="mb-5"></p>
+                <form action="{% url 'users:register' %}" method="post" class="form-box">
+                    {% csrf_token %}
+                      <h3 class="h4 text-black mb-4"></h3>
+                      <div class="form-group">Username : 
+                        <input type="text" class="form-control" name="username" placeholder="Username">
+                      </div>
+                      <div class="form-group">Email Address : 
+                        <input type="email" class="form-control" name="email" placeholder="Email Addresss">
+                      </div>
+                      <div class="form-group">Contact Number : 
+                        <input type="number" class="form-control" name="contact_number" placeholder="Contact Number">
+                      </div>
+                      <div class="form-group">Password : 
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <p style="color:red;">Alphanumeric Characters atleast 6 Characters</p>
+                      </div>
+                      
+                      <div class="form-group">Confirm Password : 
+                        <input type="password" class="form-control" name="Confirm password" placeholder="Confirm Password">
+                      </div><br>
+                      <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-pill px-5" target="{% url 'users:register' %}" value="Register Now">
+                        <a href="{% url 'users:cancel' %}" style="float:right;"><input type="button" class="btn btn-outline-danger" target="" value="Cancel"></a>
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
