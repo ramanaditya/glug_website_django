@@ -12,12 +12,15 @@ from google.auth.transport import requests
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 import os
+#from glug.pyrebase_settings import db, authe
+
 
 now = datetime.datetime.now()
 time = now.strftime("%Y-%m-%d %H:%M")
 
 BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-serviceAccount = os.path.join(BASE_DIRS, "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
+serviceAccount = os.path.join(
+    BASE_DIRS, "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
 
 config = {
     'apiKey': "AIzaSyBmZkSULfm_sKjeQW646OyEUAU_DHCLdEw",
@@ -355,7 +358,7 @@ def register(request):
                 user_email = authe.send_email_verification(new_user['idToken'])
 
                 uid = new_user['localId']
-                data1 = {"username": username,'contact_number':contact_number, "verified": 0,'email': new_user['email'], 'password': password,'admin':0,'member':1,'superuser':0}
+                data1 = {"username": username,'contact_number':contact_number, "verified": 0,'email': new_user['email'],'admin':0,'member':1,'superuser':0}
                 '''db.child("users_profile").child(uid).child("details").update(data)'''
                 #print("Registered")
                 user = authe.sign_in_with_email_and_password(email, password)
@@ -468,6 +471,7 @@ def event_create(request):
             'created_id': users_profile_info['localId'],
             'created_at': created_at,
         }
+        
         event_data = db.child("Created Events").get()
         db.child('Created Events').child(year).child(month).child(
             date).child(event_name).child('details').update(data)
@@ -583,7 +587,7 @@ def info(request):
             month_str = request.POST.get('month_str')
             tag = request.POST.get('tag')
             event_app_list = request.session['event_app_list']
-            users_profile_info = request.session['users_profile_info']
+            
             found = 0
             event_id = str(str(year)+'-'+str(month)+'-'+str(date))
             print("info")
@@ -599,18 +603,33 @@ def info(request):
                 else:
                     found = 0
             request.session['found'] = found
-            return render(request, 'events/info.html', {'contact_number': contact_number,
-                                                        'created_at': created_at,
-                                                        'created_by': created_by,
-                                                        'date': date,
-                                                        'event_details': event_details,
-                                                        'event_headline': event_headline,
-                                                        'event_name': event_name,
-                                                        'event_price': int(event_price),
-                                                        'event_time': event_time,
-                                                        'event_venue': event_venue,
-                                                        'img_event_url': img_event_url,
-                                                        'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list, 'user': users_profile_info,'found':found})
+            try:
+                users_profile_info = request.session['users_profile_info']
+                return render(request, 'events/info.html', {'contact_number': contact_number,
+                                                            'created_at': created_at,
+                                                            'created_by': created_by,
+                                                            'date': date,
+                                                            'event_details': event_details,
+                                                            'event_headline': event_headline,
+                                                            'event_name': event_name,
+                                                            'event_price': int(event_price),
+                                                            'event_time': event_time,
+                                                            'event_venue': event_venue,
+                                                            'img_event_url': img_event_url,
+                                                            'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list, 'user': users_profile_info,'found':found})
+            except:
+                    return render(request, 'events/info.html', {'contact_number': contact_number,
+                                                            'created_at': created_at,
+                                                            'created_by': created_by,
+                                                            'date': date,
+                                                            'event_details': event_details,
+                                                            'event_headline': event_headline,
+                                                            'event_name': event_name,
+                                                            'event_price': int(event_price),
+                                                            'event_time': event_time,
+                                                            'event_venue': event_venue,
+                                                            'img_event_url': img_event_url,
+                                                            'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list,'found':found})
 
     else:
         return HttpResponseRedirect('/users')
@@ -626,9 +645,9 @@ def dashboard_edit(request):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         dp = request.FILES.get['dp']
-        fs = FileSystemStorage()
-        filename = fs.save(dp.name, dp)
-        dp_url = fs.url(filename)
+        #fs = FileSystemStorage()
+        #filename = fs.save(dp.name, dp)
+        #dp_url = fs.url(filename)
         dob = request.POST.get('dob')
         usn = request.POST.get('usn')
         sem = request.POST.get('sem')
@@ -638,7 +657,7 @@ def dashboard_edit(request):
         data = {
             'first name': first_name,
             'last_name': last_name,
-            'dp_url': dp_url,
+            #'dp_url': dp_url,
             'dob':dob,
             'usn':usn,
             'sem':sem,
@@ -669,7 +688,13 @@ def dashboard_edit(request):
 
 def dashboard(request):
     users_profile_info = request.session['users_profile_info']
+    count_db = db.child('users_profile').get()
+    total_user_count = 0
+    for person in count_db.each():
+        total_user_count += 1
+    
+    print(total_user_count)
     if request.method == "POST":
         return HttpResponseRedirect( '/users')
     else:
-        return render(request, 'users/dashboard.html',{'user':users_profile_info})
+        return render(request, 'users/dashboard.html',{'user':users_profile_info,'total_user_count':total_user_count})

@@ -10,10 +10,11 @@
     <div class="intro-section" id="home-section">
       
       <div class="slide-1" style="background-image: url('/static/images/hero_1.jpg');" data-stellar-background-ratio="0.5">
+        <br>
         <div class="container">
           <div class="row align-items-center">
             <div class="col-12">
-              <div class="row align-items-center"><br><br>
+              <div class="row align-items-center">
                 <div class="col-lg-6 mb-4">
                   <h1  data-aos="fade-up" data-aos-delay="100">GNU Linux Users Group
                   <p><span class="icon-map-marker"></span>&nbsp; Sir M. Visvesvaraya Institute of Technology</p></h1>
@@ -39,10 +40,19 @@
                   {% endif %}
                   </form>
                   {% if user.registered == True %}
-                    <p data-aos="fade-up" data-aos-delay="200" >
+                  {% if user.emailVerified %}
+                  <p data-aos="fade-up" data-aos-delay="200" >
                       <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project"/>&nbsp;&nbsp;
                       <a href="{% url 'users:event_create' %}"><input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-danger py-3 px-3" type="" name="sub_mit" target="{% url 'users:event_create' %}" value="Create Event" onclick="document.getElementById( 'event_create_section' ).scrollIntoView();" /></a>
                     </p>
+                  {% else %}
+                    <p data-aos="fade-up" data-aos-delay="200" >
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project" disabled/>&nbsp;&nbsp;
+                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-danger py-3 px-3" type="" name="sub_mit" target="{% url 'users:event_create' %}" value="Create Event" onclick="document.getElementById( 'event_create_section' ).scrollIntoView();" disabled/>
+                    </p>
+                    <p data-aos="fade-up" data-aos-delay="250">Check your mail to verify your Account</p>
+                  
+                    {% endif %}
                   {% endif %}
                   
                 </div>
@@ -76,7 +86,10 @@
                   </div>
                   {% endif %}
                 {% endif %}
-
+                {% if user.email %}
+                
+                <img src="/static/images/glug_mvit_logo.png" class="" data-aos="fade-up" data-aos-delay="90" style="float:right;opacity:0.7;">
+                {% endif %}
                 {% if user_f == False or user.registered == False %}
                   {% if value == 2 %}
                   <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
@@ -265,6 +278,11 @@
                     <!--<div class="py-3 px-4"><span class="btn btn-outline-info">More Info</span></div></a>-->
                     <div class="py-3 px-4">
                         <input type="submit" class="btn btn-outline-info" name="ev_submit" value="info" />
+                        {% if user.email %}
+                        
+                        {% else %}
+                        <span style="color:red;margin-left:70px;">Login to Apply</span>
+                        {% endif %}
                         
                         
                     </div>
@@ -294,10 +312,10 @@
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-md-8 text-center testimony">
-            <img src="/static/images/Aaron_Swartz.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
-            <h3 class="mb-4">Aaron Swartz</h3>
+            <img src="/static/images/linus.jpeg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+            <h3 class="mb-4">Linus Torvalds</h3>
             <blockquote>
-              <p>&ldquo; Information is power. But like all power, there are those who want to keep it for themselves. &rdquo;</p>
+              <p><span class="icon-quote-left"></span>&nbsp;&nbsp;In open source, we feel strongly that to really do something well, you have to get a lot of people involved&nbsp;&nbsp;<span class="icon-quote-right"></span></p>
             </blockquote>
           </div>
         </div>
@@ -305,7 +323,7 @@
     </div>
 
 
-    <div class="site-section courses-title" id="courses-section">
+    <!--<div class="site-section courses-title" id="courses-section">
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="5000">
@@ -430,79 +448,77 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <div class="site-section" id="programs-section">
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center"  data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Our Programs</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
+            <h2 class="section-title">Our Events</h2>
+            <p>GLUG MVIT organises regular events,meetups,seminars,talk and many more.</p>
           </div>
         </div>
         <div class="row mb-5 align-items-center">
           <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
-            <img src="/static/images/undraw_youtube_tutorial.svg" alt="Image" class="img-fluid">
+            <img src="/static/images/nasa.jpeg" alt="Image" class="img-fluid">
           </div>
           <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
-            <h2 class="text-black mb-4">We Are Excellent In Education</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+            <h2 class="text-black mb-4">Nasa Space Apps</h2>
+        <!--    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>-->
 
             <div class="d-flex align-items-center custom-icon-wrap mb-3">
               <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
-              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+              <div><h3 class="m-0">224 Participations</h3></div>
             </div>
 
-            <div class="d-flex align-items-center custom-icon-wrap">
+            <!--<div class="d-flex align-items-center custom-icon-wrap">
               <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
               <div><h3 class="m-0">150 Universities Worldwide</h3></div>
             </div>
-
+            -->
           </div>
         </div>
 
         <div class="row mb-5 align-items-center">
           <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-            <img src="/static/images/undraw_teaching.svg" alt="Image" class="img-fluid">
+            <img src="/static/images/team1.jpeg" alt="Image" class="img-fluid">
           </div>
           <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-            <h2 class="text-black mb-4">Strive for Excellent</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+            <h2 class="text-black mb-4">Unity Game Development Workshop</h2>
+          <!--  <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>-->
 
             <div class="d-flex align-items-center custom-icon-wrap mb-3">
               <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
-              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+              <div><h3 class="m-0">196 Participations</h3></div>
             </div>
 
-            <div class="d-flex align-items-center custom-icon-wrap">
+            <!--<div class="d-flex align-items-center custom-icon-wrap">
               <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
               <div><h3 class="m-0">150 Universities Worldwide</h3></div>
             </div>
-
+            -->
           </div>
         </div>
 
         <div class="row mb-5 align-items-center">
           <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
-            <img src="/static/images/undraw_teacher.svg" alt="Image" class="img-fluid">
+            <img src="/static/images/team3.jpeg" alt="Image" class="img-fluid">
           </div>
           <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
-            <h2 class="text-black mb-4">Education is life</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maxime nam porro possimus fugiat quo molestiae illo.</p>
+            <h2 class="text-black mb-4">Winner Ideathon</h2>
+            <p class="mb-4">designed a new Vodafone youth app with AI chatbot, new features relevant offers for customers usinf machine learning and also clustering</p>
 
             <div class="d-flex align-items-center custom-icon-wrap mb-3">
-              <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
-              <div><h3 class="m-0">22,931 Yearly Graduates</h3></div>
+             <!-- <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
+              <div><h3 class="m-0"></h3></div>-->
             </div>
 
             <div class="d-flex align-items-center custom-icon-wrap">
-              <span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
-              <div><h3 class="m-0">150 Universities Worldwide</h3></div>
+              <!--<span class="custom-icon-inner mr-3"><span class="icon icon-university"></span></span>
+              <div><h3 class="m-0"></h3></div>-->
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
 
@@ -510,12 +526,12 @@
 
 
 <br><br><br><br>
-    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="500">
+    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="500" id="team-section">
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 mb-5 text-center"  data-aos="fade-up" data-aos-delay="">
             <h2 class="section-title">Our Team</h2>
-            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
+            <p class="mb-5">We constitue a team of clear sense of purpose,measurable objectives</p>
           </div>
         </div>
         
@@ -527,6 +543,7 @@
                 <div class="py-2">
                   <h3 class="text-black">Abhijit Singh</h3>
                   <p class="position">GLUG Member</p>
+                  
                   <span style="font-size:30px;">
                     <a href="https://www.linkedin.com/in/thatniceman/">
                       <span class="icon-linkedin-square"></span>
@@ -558,7 +575,7 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
                     </a>
                   </span>
                   
-                  <p></p>
+                  <p>Machine Learning | Data Analytics | Programming</p><br>
                 </div>
               </div>
             </div>
@@ -579,7 +596,7 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
                       <span class="icon-github"></span>
                     </a>
                   </span>
-                  <p></p>
+                  <p>Data Science Enthusiast || Former Full Stack Developer Intern || Volunteer at UNV Online</p>
                 </div>
               </div>
             </div>
@@ -599,7 +616,7 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
                       <span class="icon-github"></span>
                     </a>
                   </span>
-                  <p></p>
+                  <p>Computer Vision | ML | Deep Learning | Full Stack Development </p><br>
                 </div>
               </div>
             </div>
@@ -612,8 +629,14 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
 
          
         </div>
+        <div class="row justify-content-center">
+          <div class="col-7 text-center">
+            <button class="customPrevBtn btn btn-primary m-1">Prev</button>
+            <button class="customNextBtn btn btn-primary m-1">Next</button>
+          </div>
         </div>
-
+        </div>
+<br><br>
 
 
 
@@ -749,7 +772,7 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
     </div>
 
 
-    <div class="site-section bg-light" id="contact-section">
+    <!--<div class="site-section bg-light" id="contact-section">
       <div class="container">
 
         <div class="row justify-content-center">
@@ -798,7 +821,7 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
     
      </div>
     

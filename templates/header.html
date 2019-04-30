@@ -12,9 +12,10 @@
               <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
                 <li><a href="#home-section" class="nav-link">Home</a></li>
                 <li><a href="#courses-section" class="nav-link">Events</a></li>
-                <li><a href="#programs-section" class="nav-link">Programs</a></li>
-                <li><a href="#teachers-section" class="nav-link">Teachers</a></li>
-                <li><a href="#contact-section" class="nav-link"><span>Contact Us</span></a></li>
+                <li><a href="https://blog.glugmvit.com/" class="nav-link">Blog</a></li>
+                <li><a href="#programs-section" class="nav-link">Synopsis</a></li>
+                <li><a href="#team-section" class="nav-link">Our Team</a></li>
+                <li><a href="{% url 'users:logout' %}">Logout</a></li>
               </ul>
             </nav>
           </div>
@@ -26,13 +27,14 @@
                 <li class="cta dropdown"><a class="" data-toggle="dropdown" href="#" ><span>{{ user.username }} &#8681;</span></a>
                   <ul class="dropdown-menu">
                     <li class="nav-link"><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+                    <li class="nav-link"><a href="#contact-section" >Contact Us</a></li>
                     <li class="nav-link"><a href="{% url 'users:logout' %}">Logout</a></li>
                   </ul>
                 </li>
                 {% endif %}
               </ul>
             </nav>
-            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
+            <a class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
           </div>
         </div>
       </div>
