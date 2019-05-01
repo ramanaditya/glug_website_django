@@ -17,10 +17,12 @@ if __name__ == '__main__':
             "forget to activate a virtual environment?"
         ) from exc
         
+
     #BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     #dir_add = os.path.join(
     #    BASE_DIRS, "glug_website_django/glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = settings.GOOGLE_APPLICATION_CREDENTIALS
     #bq_client = Client()
+
     
     execute_from_command_line(sys.argv)
