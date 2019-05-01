@@ -18,8 +18,9 @@ import os
 now = datetime.datetime.now()
 time = now.strftime("%Y-%m-%d %H:%M")
 
-#BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#serviceAccount = os.path.join(BASE_DIRS, "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
+BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+serviceAccount = os.path.join(
+    BASE_DIRS, "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
 
 config = {
     'apiKey': "AIzaSyBmZkSULfm_sKjeQW646OyEUAU_DHCLdEw",
@@ -28,9 +29,7 @@ config = {
     'projectId': "glugmvit-web",
     'storageBucket': "glugmvit-web.appspot.com",
     'messagingSenderId': "198252493",
-    'serviceAccount': settings.GOOGLE_APPLICATION_CREDENTIALS
-    # 'serviceAccount': "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json",
-
+    'serviceAccount': "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json",
 }
 firebase = pyrebase.initialize_app(config)
 authe = firebase.auth()
