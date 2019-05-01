@@ -3,6 +3,7 @@ import os
 import sys
 from google.cloud.bigquery.client import Client
 from google.oauth2 import service_account
+from django.conf import settings
 
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'glug.settings')
@@ -16,12 +17,10 @@ if __name__ == '__main__':
             "forget to activate a virtual environment?"
         ) from exc
         
-    BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    dir_add = os.path.join(
-        BASE_DIRS, "glug_website_django/glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
-    print(dir_add)
-    # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json"
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = dir_add
-    bq_client = Client()
+    #BASE_DIRS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    #dir_add = os.path.join(
+    #    BASE_DIRS, "glug_website_django/glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = settings.GOOGLE_APPLICATION_CREDENTIALS
+    #bq_client = Client()
     
     execute_from_command_line(sys.argv)
