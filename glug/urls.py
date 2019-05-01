@@ -21,10 +21,11 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('',views.index,name="index"),
+    #path('',views.index,name="index"),
+    path('',include('users.urls')),
     path('admin/', admin.site.urls),
     path('blogs/',include('blogs.urls')),
-    path('users/',include('users.urls')),
+    
     path('events/',include('events.urls')),
     
 ]
