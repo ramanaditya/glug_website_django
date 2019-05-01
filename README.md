@@ -1,7 +1,7 @@
 # GLUG MVIT
 <hr>
 
-## Using the Website
+## Running the website on your localhost
 
 ```
 > python3 -m virtualenv glug_env      # Create a virtual environment.
