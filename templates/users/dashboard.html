@@ -34,9 +34,15 @@
 
 
 
-                <h2 class="section-title mb-3"></h2>
-                <p class="mb-5"></p>
-
+                <h2 class="section-title mb-3">Profile Details</h2><br><br>
+                <h4>Name : {{ user.first_name }}&nbsp;&nbsp;{{ user.last_name }}</h4>
+                <h4>Date of Birth : {{ user.dob }}</h4>
+                <h4>USN : {{ user.usn }}</h4>
+                <h4>Sem : {{ user.sem }}</h4>
+                <h3>I am ,<h3>
+                <h4>{{ user.desc }}</h4>
+                <h4 class="mb-5">Email : {{ user.email }} &nbsp;&nbsp;{% if not user.emailVerified %}<p>Check your email to verify your account</p>{% endif %}</h4>
+                <h4>Contact Number : {{ user.contact_number }}</h4>
                 <!--<form method="post" action="{% url 'users:dashboard' %}" data-aos="fade" enctype="multipart/form-data">
                 {% csrf_token %}
                   <div class="form-group row">

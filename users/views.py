@@ -428,10 +428,14 @@ def event_create(request):
     if request.method == "POST":
         users_profile_info = request.session['users_profile_info']
         tag = request.POST.get('tag')
-        img_event = request.FILES['img_event']
-        fs = FileSystemStorage()
-        filename = fs.save(img_event.name, img_event)
-        img_event_url = fs.url(filename)
+        
+        try:
+            img_event = request.FILES['img_event']
+            fs = FileSystemStorage()
+            filename = fs.save(img_event.name, img_event)
+            img_event_url = fs.url(filename)
+        except:
+            img_event_url = ""
         #print(img_event)
         tag = tag.split(",")
         event_name = request.POST.get('event_name')
@@ -644,7 +648,8 @@ def dashboard_edit(request):
         uid = users_profile_info['localId']
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        dp = request.FILES.get['dp']
+        
+        #dp = request.FILES.get['dp']
         #fs = FileSystemStorage()
         #filename = fs.save(dp.name, dp)
         #dp_url = fs.url(filename)
@@ -662,7 +667,7 @@ def dashboard_edit(request):
             'usn':usn,
             'sem':sem,
             'desc':desc,
-            'email':email,
+            #'email':email,
             'contact_number':contact_number,
         }
         localId = request.session['localId']
@@ -683,7 +688,8 @@ def dashboard_edit(request):
         #print(users_profile)
         return render(request, 'users/dashboard.html',{'user':users_profile_info})
     else:
-        return render(request, 'users/dashboard_edit.html')
+        users_profile_info = request.session['users_profile_info']
+        return render(request, 'users/dashboard_edit.html',{'user':users_profile_info})
 
 
 def dashboard(request):
