@@ -4,56 +4,68 @@
 <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
 
+
+<div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body" style="list-style-type: none;">
+      
+              
+                
+                <li><a href="/#courses-section" class="nav-link">Events</a></li>
+                <li><a href="https://blog.glugmvit.com/" class="nav-link">Blog</a></li>
+                <li><a href="/#programs-section" class="nav-link">Synopsis</a></li>
+                <li><a href="/#team-section" class="nav-link">Our Team</a></li>
+                {% if user.email %}
+                <li><a href="{% url 'users:dashboard' %}" class="nav-link">Dashboard</a></li>
+                
+                <li><a href="{% url 'users:logout' %}"  class="nav-link"><strong style='color:red;'>Logout</strong></a></li>
+                {% endif %}
+             
+            
+      </div>
+    </div>
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+        
+    
+
       <div class="container-fluid">
         <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="{% url 'users:home' %}">GLUG</a></div>
+          <div class="site-logo mr-auto w-20"><a href="{% url 'users:home' %}">GLUG</a></div>
 
           <div class="mx-auto text-center">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu mx-auto d-none d-lg-block  m-0 p-0">
-                <li><a href="#home-section" class="nav-link">Home</a></li>
-                <li><a href="#courses-section" class="nav-link">Events</a></li>
-                <li><a href="https://blog.glugmvit.com/" class="nav-link">Blog</a></li>
-                <li><a href="#programs-section" class="nav-link">Synopsis</a></li>
-                <li><a href="#team-section" class="nav-link">Our Team</a></li>
                 
+                <li><a href="/#courses-section" class="nav-link">Events</a></li>
+                <li><a href="https://blog.glugmvit.com/" class="nav-link">Blog</a></li>
+                <li><a href="/#programs-section" class="nav-link">Synopsis</a></li>
+                <li><a href="/#team-section" class="nav-link">Our Team</a></li>
+                {% if user.email %}
+                <li><a href="{% url 'users:dashboard' %}" class="nav-link">Dashboard</a></li>
+                
+                <li><a href="{% url 'users:logout' %}" class="nav-link"><strong>Logout</strong></a></li>
+                {% endif %}
               </ul>
             </nav>
           </div>
-          <div class="mx-auto text-center">
-          {% if user.registered == True %}
-          
-          <!--<ul class="mx-auto d-none d-lg-block  m-0 p-0" style="list-style: none;">-->
-          
-          <a data-toggle="dropdown"><li class="cta dropdown btn btn-primary">{{ user.username }}&nbsp; &#8681;</li></a>
-                  <ul class="dropdown-menu" style="list-style: none;">
-                    <li class="nav-link"><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
-                    <li class="nav-link"><a href="#contact-section" >Contact Us</a></li>
-                    <li class="nav-link"><a href="{% url 'users:logout' %}">Logout</a></li>
-                  </ul>
-          
-          <ul>
-          {% endif %}
-          </div>
-          <!--<div class="ml-auto w-25">
+         
+          <div class="ml-auto w-20">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
                 {% if user.registered == True %}
 
-                <!-<li class="cta dropdown"><a class="" data-toggle="dropdown" href="" ><span>{{ user.username }} &#8681;</span></a>-->
-                <!--<li class="cta dropdown"><a class="" data-toggle="dropdown" href="{% url 'users:logout' %}" ><span>{{ user.username }} &#8681;</span></a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-link"><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
-                    <li class="nav-link"><a href="#contact-section" >Contact Us</a></li>
-                    <a href="{% url 'users:logout' %}"><input type="button" class='btn btn-danger' value="Logout"></a>
-                  </ul>
-                </li>
+                <!--<li class="cta dropdown"><a class="" data-toggle="dropdown" href="" ><span>{{ user.username }} &#8681;</span></a>-->
+                <li class="cta dropdown"><a class="" data-toggle="dropdown" href="{% url 'users:logout' %}" ><span>{{ user.username }}</span></a></li>
                 {% endif %}
               </ul>
             </nav>
             <a class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
-          </div>-->
+          </div>
         </div>
       </div>
 
-    
+    </header>

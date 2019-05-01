@@ -334,14 +334,14 @@ def login(request):
             authe.refresh(user['refreshToken'])
 
             #request.session['users_profile'] = users_profile
-            return HttpResponseRedirect("/users")
+            return HttpResponseRedirect("/")
         except:
             message = "invalid credentials"
             #print(message)
-            return HttpResponseRedirect("/users", {'msg': message})
+            return HttpResponseRedirect("/", {'msg': message})
     else:
         #print("Not login")
-        return HttpResponseRedirect("/users")
+        return HttpResponseRedirect("/")
 
 
 def register(request):
@@ -413,7 +413,7 @@ def register(request):
                 request.session['uid'] = str(session_id)
                 request.session['user'] = user_login'''
                 #print("last register")
-                return HttpResponseRedirect("/users")
+                return HttpResponseRedirect("/")
             except:
                 #print("Error")
                 message = "Unable to create account try again"
@@ -479,7 +479,7 @@ def event_create(request):
         event_data = db.child("Created Events").get()
         db.child('Created Events').child(year).child(month).child(
             date).child(event_name).child('details').update(data)
-        return HttpResponseRedirect('/users')
+        return HttpResponseRedirect('/')
 
     else:
         users_profile_info = request.session['users_profile_info']
@@ -491,11 +491,11 @@ def event_create(request):
 #logout view
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/users/')
+    return HttpResponseRedirect('/')
 
 
 def cancel(request):
-    return HttpResponseRedirect('/users/')
+    return HttpResponseRedirect('/')
 
 
 def event_apply(request):
@@ -549,7 +549,7 @@ def event_apply(request):
             event_name).child('Registered').child(localId).update(data)
         users_db = db.child("users_profile").get()
         db.child("users_profile").child(localId).child('details').update(data)
-        return HttpResponseRedirect('/users')
+        return HttpResponseRedirect('/')
 
     else:
         year = request.session['year']
@@ -592,6 +592,9 @@ def info(request):
             tag = request.POST.get('tag')
             event_app_list = request.session['event_app_list']
             
+            event_det_list = event_details.split('.')
+            
+            print(event_det_list)
             found = 0
             event_id = str(str(year)+'-'+str(month)+'-'+str(date))
             print("info")
@@ -613,7 +616,7 @@ def info(request):
                                                             'created_at': created_at,
                                                             'created_by': created_by,
                                                             'date': date,
-                                                            'event_details': event_details,
+                                                            'event_details': event_det_list,
                                                             'event_headline': event_headline,
                                                             'event_name': event_name,
                                                             'event_price': int(event_price),
@@ -636,7 +639,7 @@ def info(request):
                                                             'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list,'found':found})
 
     else:
-        return HttpResponseRedirect('/users')
+        return HttpResponseRedirect('/')
 
 
 
@@ -701,6 +704,6 @@ def dashboard(request):
     
     print(total_user_count)
     if request.method == "POST":
-        return HttpResponseRedirect( '/users')
+        return HttpResponseRedirect( '/')
     else:
         return render(request, 'users/dashboard.html',{'user':users_profile_info,'total_user_count':total_user_count})

@@ -42,12 +42,12 @@
                   {% if user.registered == True %}
                   {% if user.emailVerified %}
                   <p data-aos="fade-up" data-aos-delay="200" >
-                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project"/>&nbsp;&nbsp;
+                   <!--   <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project"/>&nbsp;&nbsp; -->
                       <a href="{% url 'users:event_create' %}"><input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-danger py-3 px-3" type="" name="sub_mit" target="{% url 'users:event_create' %}" value="Create Event" onclick="document.getElementById( 'event_create_section' ).scrollIntoView();" /></a>
                     </p>
                   {% else %}
                     <p data-aos="fade-up" data-aos-delay="200" >
-                      <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project" disabled/>&nbsp;&nbsp;
+                   <!--   <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-info py-3 px-3" type="submit" name="sub_mit" value="Open Project" disabled/>&nbsp;&nbsp; -->
                       <input data-aos="fade-up" data-aos-delay="300" class="btn btn-outline-danger py-3 px-3" type="" name="sub_mit" target="{% url 'users:event_create' %}" value="Create Event" onclick="document.getElementById( 'event_create_section' ).scrollIntoView();" disabled/>
                     </p>
                     <p data-aos="fade-up" data-aos-delay="250">Check your mail to verify your Account</p>
@@ -86,10 +86,7 @@
                   </div>
                   {% endif %}
                 {% endif %}
-                {% if user.email %}
                 
-                <img src="/static/images/glug_mvit_logo.png" class="" data-aos="fade-up" data-aos-delay="90" style="float:right;opacity:0.7;">
-                {% endif %}
                 {% if user_f == False or user.registered == False %}
                   {% if value == 2 %}
                   <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
@@ -225,22 +222,22 @@
     {% if event_detail == NULL or event_detail == None %}
     {% else %}
     
-    <div class="site-section courses-title" id="courses-section">
+    <div class="site-section courses-title" id="courses-section" style="background-color:#F5F5F5">
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Upcoming Events</h2>
+            <h2 class="section-title" style="color:#515151">Upcoming Events</h2>
           </div>
         </div>
       </div>
     </div>
-    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100">
+    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100" style="background-color:#F5F5F5;">
       <div class="container">
-        <div class="row">
+        <div class="row" >
 
-          <div class="owl-carousel col-12 nonloop-block-14">
+          <div class="owl-carousel col-12 nonloop-block-14" >
             {% for item in event_detail %}
-            <div class="course bg-white h-100 align-self-stretch">
+            <div class="course bg-white h-100 align-self-stretch" >
               <figure class="m-0">
                 {% if item.img_event_url %}<a href="#"><img src="{{ item.img_event_url }}" alt="Image" class="img-fluid" style="min-height:145px;max-height:145px;z-index:-1;"></a>{% else %}
                 <a href="#"><img src="/static/images/event_reg_default.jpg" alt="Image" class="img-fluid"></a>{% endif %}
@@ -299,8 +296,8 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-7 text-center">
-            <button class="customPrevBtn btn btn-primary m-1">Prev</button>
-            <button class="customNextBtn btn btn-primary m-1">Next</button>
+            <button class="customPrevBtn btn btn-primary m-1 px-3" >Prev</button>
+            <button class="customNextBtn btn btn-primary m-1 px-3" >Next</button>
           </div>
         </div>
       </div>
@@ -454,7 +451,7 @@
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 text-center"  data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Our Events</h2>
+            <h2 class="section-title" style="color:#515151">Our Events</h2>
             <p>GLUG MVIT organises regular events,meetups,seminars,talk and many more.</p>
           </div>
         </div>
@@ -506,7 +503,7 @@
           </div>
           <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
             <h2 class="text-black mb-4">Winner Ideathon</h2>
-            <p class="mb-4">designed a new Vodafone youth app with AI chatbot, new features relevant offers for customers usinf machine learning and also clustering</p>
+            <p class="mb-4">Designed a new Vodafone youth app with AI chatbot, new features relevant offers for customers using machine learning and also clustering</p>
 
             <div class="d-flex align-items-center custom-icon-wrap mb-3">
              <!-- <span class="custom-icon-inner mr-3"><span class="icon icon-graduation-cap"></span></span>
@@ -526,11 +523,11 @@
 
 
 <br><br><br><br>
-    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="500" id="team-section">
+    <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="500" id="team-section" style="background-color:light-grey">
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-lg-7 mb-5 text-center"  data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Our Team</h2>
+            <h2 class="section-title" style="color:#515151">Our Team</h2>
             <p class="mb-5">We constitue a team of clear sense of purpose,measurable objectives</p>
           </div>
         </div>
@@ -631,8 +628,8 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
         </div>
         <div class="row justify-content-center">
           <div class="col-7 text-center">
-            <button class="customPrevBtn btn btn-primary m-1">Prev</button>
-            <button class="customNextBtn btn btn-primary m-1">Next</button>
+            <button class="customPrevBtn btn btn-primary m-1 px-3">Prev</button>
+            <button class="customNextBtn btn btn-primary m-1 px-3">Next</button>
           </div>
         </div>
         </div>
@@ -722,7 +719,7 @@ GLUG Lead | Microsoft Student Partner | AI Developer</p>
       <div class="container">
         <div class="row mb-5 justify-content-center" data-aos="fade-up" data-aos-delay="">
           <div class="col-lg-7 text-center">
-            <h2 class="section-title">Why Choose Us</h2>
+            <h2 class="section-title" style="color:#515151">Why Choose Us</h2>
           </div>
         </div>
         <div class="row">
