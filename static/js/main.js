@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 
       });
 
-    }, 1000);
+    }, 10000);
 
 		$('body').on('click', '.arrow-collapse', function(e) {
       var $this = $(this);

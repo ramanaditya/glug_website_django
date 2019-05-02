@@ -13,7 +13,7 @@
             <div class="col-12">
               <div class="row justify-content-center align-items-center text-center">
                 <div class="col-lg-6">
-                  <h1 data-aos="fade-up" data-aos-delay="0">{{ event_name }}</h1>
+                  <h1 data-aos="fade-up" data-aos-delay="0" style="text-transform:uppercase;">{{ event_name }}</h1>
                   <p>{{ event_headline}}</p>
                   <!--<p data-aos="fade-up" data-aos-delay="100">{{ event_detail_count }} Lessons / 12 Week &bullet; 2,193 students &bullet; <a href="#" class="text-white">6 comments</a></p>-->
                 </div>
@@ -36,12 +36,18 @@
                       
                         {% if found == 1  %}
                         
-                        <input type="button" class=" btn btn-danger" style="align:right;" name="submit" value="Applied" disabled/>
+                        <input type="button" data-aos="fade-up" data-aos-delay="10" class=" btn btn-danger" style="align:right;" name="submit" value="Applied" disabled/>
                         
                         {% else %}
-                        <input type="submit" class=" btn btn-outline-danger" style="align:right;" name="submit" value="Apply" />
+                        {% if user.email %}
+                        <input type="submit" data-aos="fade-up" data-aos-delay="10" onclick="myFunction()" class=" btn btn-outline-danger" style="align:right;" name="submit" value="Apply" />
+
+
+
+                        {% else %}
+                        <a href="{% url 'users:login' %}"><input type="button" class=" btn btn-outline-danger" style="align:right;" name="submit" value="Login to Apply"/></a>
                         {% endif %}
-                        
+                        {% endif %}
                         
                     </div>
                 </form>
@@ -66,7 +72,7 @@
 <p>{% if event_price == 0 %}
 <input data-aos="" data-aos-delay="" class="btn  btn-black py-3 px-5" type="submit"  value="F R E E "/>
 {% else %}
-<input data-aos="" data-aos-delay="" class="btn btn-dark py-3 px-5" type="submit"  value="Rs {{ event_price }}"/>
+<input data-aos="" data-aos-delay="" class="btn btn-dark py-3 px-5" type="submit"  value="Rs &nbsp;&nbsp;{{ event_price }}"/>
 {% endif %}
 </p>
 </div> 
@@ -76,9 +82,11 @@
             
             <div class="row justify-content-center">
               <div class="col-md-7">
-
+                {% for det in event_details %}
                 
-                <h2>{{ event_details }}</h2>
+                <h2>{{ det }}
+                </h2><br>
+                {% endfor %}
                 <br><br><br><br>
                 <p>Contact : </p>
                 <p><a href="callto:{{ item.contact_number }}"<span class="icon-phone2"></span>&nbsp;{{ contact_number}}</a>&nbsp;</p>
@@ -95,5 +103,10 @@
         </div>
 
 
+<script>
+function myFunction() {
+  alert("APPLIED SUCCESSFULLY");
+}
+</script>
 
 {% endblock %}

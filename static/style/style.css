@@ -395,7 +395,7 @@ h1, h2, h3, h4, h5,
         .site-navbar .site-navigation .site-menu .has-children .dropdown .active > a {
           color: #7971ea !important; }
         .site-navbar .site-navigation .site-menu .has-children .dropdown > li {
-          list-style: none;
+          list-style: ;
           padding: 0;
           margin: 0;
           min-width: 200px; }

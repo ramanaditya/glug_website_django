@@ -10,14 +10,14 @@
             <div class="col-12">
               <div class="row justify-content-center align-items-center text-center">
                 <div class="col-lg-6">
-                  <h1 data-aos="fade-up" data-aos-delay="0">Hi, Welcome {{ user.email }}</h1>
-                  <p data-aos="fade-up" data-aos-delay="100">{{ event_detail_count }} Lessons / 12 Week &bullet; 2,193 students &bullet; <a href="#" class="text-white">6 comments</a></p>
+                  <h1 data-aos="fade-up" data-aos-delay="0">Hi, {{ user.username }}</h1>
+                  <p data-aos="fade-up" data-aos-delay="100">We are a community of  <a href="" class="text-white">{{ total_user_count }} members </a> and counting</p>
                 </div>
                 
                 
               </div>
               <div class=" text-center">
-              <a href="{% url 'users:dashboard_edit' %}"><input type="submit" class=" btn btn-outline-info text-center" style="align:right;" name="ev_submit" value=" Edit Your Profile " /></a>
+              <a href="{% url 'users:dashboard_edit' %}"><input type="submit" data-aos="fade-up" data-aos-delay="100" class=" btn btn-outline-info text-center" style="align:right;" name="ev_submit" value=" Edit Your Profile " /></a>
               </div>
             </div>
             
@@ -34,9 +34,15 @@
 
 
 
-                <h2 class="section-title mb-3"></h2>
-                <p class="mb-5"></p>
-
+                <h2 class="section-title mb-3">Profile Details</h2><br><br>
+                <h4>Name : {{ user.first_name }}&nbsp;&nbsp;{{ user.last_name }}</h4>
+                <h4>Date of Birth : {{ user.dob }}</h4>
+                <h4>USN : {{ user.usn }}</h4>
+                <h4>Sem : {{ user.sem }}</h4>
+                <h3>I am ,<h3>
+                <h4>{{ user.desc }}</h4>
+                <h4 class="mb-5">Email : {{ user.email }} &nbsp;&nbsp;{% if not user.emailVerified %}<p>Check your email to verify your account</p>{% endif %}</h4>
+                <h4>Contact Number : {{ user.contact_number }}</h4>
                 <!--<form method="post" action="{% url 'users:dashboard' %}" data-aos="fade" enctype="multipart/form-data">
                 {% csrf_token %}
                   <div class="form-group row">
