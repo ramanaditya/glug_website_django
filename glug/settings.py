@@ -19,6 +19,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates/')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 # 
+# test
 
 GOOGLE_APPLICATION_CREDENTIALS=os.path.join(BASE_DIR,"site/repository/glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
 
