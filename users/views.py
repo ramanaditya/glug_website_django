@@ -14,6 +14,8 @@ from django.core.files.storage import FileSystemStorage
 import os
 #from glug.pyrebase_settings import db, authe
 
+from django import db
+db.connections.close_all()
 
 now = datetime.datetime.now()
 time = now.strftime("%Y-%m-%d %H:%M")
