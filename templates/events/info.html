@@ -64,7 +64,7 @@
 <div class="site-section bg-light" id="event_create_section">
 <div class="teacher text-center">
 <p>
-  <span class="icon-map-marker">&nbsp;{{ event_venue }}</span> &nbsp; 
+  <span class="icon-map-marker">&nbsp;{{ event_venue }}{{ created_by_name }}</span> &nbsp; 
 </p>
 <p>
   <span class="icon-date_range text-center"></span>{{ month_str }}&nbsp;{{ date }},&nbsp; {{ year }} <span class="icon-timer"></span>{{ event_time }}  
@@ -84,13 +84,27 @@
               <div class="col-md-7">
                 {% for det in event_details %}
                 
-                <h2>{{ det }}
+                <h2>{{ det }}.
                 </h2><br>
                 {% endfor %}
                 <br><br><br><br>
                 <p>Contact : </p>
-                <p><a href="callto:{{ item.contact_number }}"<span class="icon-phone2"></span>&nbsp;{{ contact_number}}</a>&nbsp;</p>
-                <p><a href="mailto:{{ item.created_by }}?Subject=Regarding%20the%20Event%20{{item.event_name}}&body=Hi,%20I%20am%20{{ user.email }}%0AI%20get%20to%20know%20about%20{{ item.event_name }}%20on%20GLUG%20Website%0A%0A%0A%0A"<span class="icon-envelope-o"></span>&nbsp;{{ created_by }}</a></p>
+                <p>{{ created_by_name }}</p>
+                <p><a href="callto:{{ contact_number }}"<span class="icon-phone2"></span>&nbsp;{{ contact_number }}</a>&nbsp;</p>
+                <p><a href="mailto:{{ created_by_email }}?Subject=Regarding%20the%20Event%20{{item.event_name}}&body=Hi,%20I%20am%20{{ user.email }}%0AI%20get%20to%20know%20about%20{{ item.event_name }}%20on%20GLUG%20Website%0A%0A%0A%0A"<span class="icon-envelope-o"></span>&nbsp;{{ created_by_email }}</a></p>
+                
+                
+                <p>Alternate Contact : </p>
+                {% if alt_name %}
+                
+                <p>{{ alt_name }}</p>
+                {% endif %}
+                {% if alt_contact %}
+                <p><a href="callto:{{ alt_contact }}"<span class="icon-phone2"></span>&nbsp;{{ alt_contact }}</a>&nbsp;</p>
+                {% endif %}
+                {% if alt_email %}
+                <p><a href="mailto:{{ alt_email }}?Subject=Regarding%20the%20Event%20{{item.event_name}}&body=Hi,%20I%20am%20{{ user.email }}%0AI%20get%20to%20know%20about%20{{ item.event_name }}%20on%20GLUG%20Website%0A%0A%0A%0A"<span class="icon-envelope-o"></span>&nbsp;{{ alt_email }}</a></p>
+                {% endif %}
                 <h2 class="section-title mb-3"></h2>
                
 

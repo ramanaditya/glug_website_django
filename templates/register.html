@@ -37,9 +37,14 @@
                 <form action="{% url 'users:register' %}" method="post" class="form-box">
                     {% csrf_token %}
                       <h3 class="h4 text-black mb-4"></h3>
-                      <div class="form-group">Username : 
-                        <input type="text" class="form-control" name="username" placeholder="Username">
-                      </div>
+                      <div class="form-group">First Name : 
+                    
+                      <input type="text" class="form-control" name="first_name" placeholder="First name">
+                    </div>
+                    <div class="form-group">Last Name : 
+                      <input type="text" class="form-control" name="last_name" placeholder="Last name">
+                    </div>
+                  
                       <div class="form-group">Email Address : 
                         <input type="email" class="form-control" name="email" placeholder="Email Addresss">
                       </div>
