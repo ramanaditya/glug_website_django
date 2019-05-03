@@ -630,7 +630,7 @@ def info(request):
                                                             'created_at': created_at,
                                                             'created_by': created_by,
                                                             'date': date,
-                                                            'event_details': event_details,
+                                                            'event_details': event_det_list,
                                                             'event_headline': event_headline,
                                                             'event_name': event_name,
                                                             'event_price': int(event_price),
@@ -664,7 +664,7 @@ def dashboard_edit(request):
         email = request.POST.get('email')
         contact_number = request.POST.get('contact_number')
         data = {
-            'first name': first_name,
+            'first_name': first_name,
             'last_name': last_name,
             #'dp_url': dp_url,
             'dob':dob,
@@ -702,8 +702,9 @@ def dashboard(request):
     total_user_count = 0
     for person in count_db.each():
         total_user_count += 1
-    
+    print("Count")
     print(total_user_count)
+    print(users_profile_info)
     if request.method == "POST":
         return HttpResponseRedirect( '/')
     else:
