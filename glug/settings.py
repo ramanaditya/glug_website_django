@@ -136,4 +136,4 @@ MEDIA_URL = '/media/'
 import django_heroku
 django_heroku.settings(locals())
 
-SESSIONS_ENGINE = 'django.contrib.sessions.backends.file'
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'
