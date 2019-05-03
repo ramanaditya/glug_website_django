@@ -27,7 +27,7 @@ GOOGLE_APPLICATION_CREDENTIALS=os.path.join(BASE_DIR,"glugmvit-web-firebase-admi
 SECRET_KEY = 'azo$^1s0_el845m*o!7mujctcn)8j_72usvy=jp)l=5oh!a0)$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
