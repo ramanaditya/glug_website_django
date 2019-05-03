@@ -59,7 +59,7 @@
                 {% if user.registered == True %}
 
                 <!--<li class="cta dropdown"><a class="" data-toggle="dropdown" href="" ><span>{{ user.username }} &#8681;</span></a>-->
-                <li class="cta dropdown"><a class="" data-toggle="dropdown" href="{% url 'users:logout' %}" ><span>{{ user.username }}</span></a></li>
+                <li class="cta dropdown"><a class="" data-toggle="dropdown" href="{% url 'users:logout' %}" ><span>{% if user.username %}{{ user.username }}{% else %}{{ user.first_name }}{% endif %}</span></a></li>
                 {% endif %}
               </ul>
             </nav>

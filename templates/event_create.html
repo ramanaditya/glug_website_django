@@ -94,7 +94,24 @@
                   
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <input type="number" name="contact_number" class="form-control" placeholder="Enter the Contact number" required>
+                      <input type="number" name="contact_number" class="form-control" placeholder="{{ user.contact_number }}" disabled>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="text" name="alt_name" class="form-control" placeholder="Alternate Name" >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="email" name="alt_email" class="form-control" placeholder="Alternate Email" >
+                    </div>
+                  </div>
+                  
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <input type="number" name="alt_contact" class="form-control" placeholder="Alternate Contatct" >
                     </div>
                   </div>
 

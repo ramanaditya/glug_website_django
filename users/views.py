@@ -155,7 +155,7 @@ def home(request):
                 "event_price": 500,
                 "event_time": "event_time",
                 "event_venue": "Computer Lab",
-                "img_event_url": "/media/image5.png",
+                "img_event_url": "",
                 "month": 4,
                 "month_str": "Apr",
                 "tag": ["App", "Web"],
@@ -347,11 +347,13 @@ def login(request):
 
 def register(request):
     if request.method == "POST":
-        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         contact_number = request.POST.get('contact_number')
         password = request.POST.get('password')
         confirm_password = request.POST.get('password')
+        name = first_name + str(' ') + last_name
         if password == confirm_password:
             try:
                 new_user = authe.create_user_with_email_and_password(
@@ -359,7 +361,7 @@ def register(request):
                 user_email = authe.send_email_verification(new_user['idToken'])
 
                 uid = new_user['localId']
-                data1 = {"username": username,'contact_number':contact_number, "verified": 0,'email': new_user['email'],'admin':0,'member':1,'superuser':0}
+                data1 = {"first_name": first_name,'last_name':last_name,'name':name,'password':password,'contact_number':contact_number, "verified": 0,'email': new_user['email'],'admin':0,'member':1,'superuser':0}
                 '''db.child("users_profile").child(uid).child("details").update(data)'''
                 #print("Registered")
                 user = authe.sign_in_with_email_and_password(email, password)
@@ -453,29 +455,58 @@ def event_create(request):
         event_headline = request.POST.get('event_headline')
         event_details = request.POST.get('event_details')
         contact_number = request.POST.get('contact_number')
+        alt_name = request.POST.get('alt_name')
+        alt_email = request.POST.get('alt_email')
+        alt_contact = request.POST.get('alt_contact')
+
         #idtoken = request.session['uid']
         #a = authe.get_account_info(idtoken)
         #a = a['users'][0]
         #a = a['localId']
         created_at = time
-        data = {
-            'event_name': event_name,
-            'date': date,
-            'month': month,
-            'month_str': month_str,
-            'year': year,
-            'tag': tag,
-            'img_event_url': img_event_url,
-            'event_time': event_time,
-            'event_venue': event_venue,
-            'event_price': int(event_price),
-            'event_headline': event_headline,
-            'event_details': event_details,
-            'created_by': users_profile_info['email'],
-            'contact_number': contact_number,
-            'created_id': users_profile_info['localId'],
-            'created_at': created_at,
-        }
+        try:
+            data = {
+                'event_name': event_name,
+                'date': date,
+                'month': month,
+                'month_str': month_str,
+                'year': year,
+                'tag': tag,
+                'img_event_url': img_event_url,
+                'event_time': event_time,
+                'event_venue': event_venue,
+                'event_price': int(event_price),
+                'event_headline': event_headline,
+                'event_details': event_details,
+                'created_by_name': users_profile_info['name'],
+                'created_by_email': users_profile_info['email'],
+                'contact_number': users_profile_info['contact_number'],
+                'created_id': users_profile_info['localId'],
+                'created_at': created_at,
+                'alt_name':alt_name,
+                'alt_email':alt_email,
+                'alt_contact':alt_contact,
+            }
+        except:
+            data = {
+                'event_name': event_name,
+                'date': date,
+                'month': month,
+                'month_str': month_str,
+                'year': year,
+                'tag': tag,
+                'img_event_url': img_event_url,
+                'event_time': event_time,
+                'event_venue': event_venue,
+                'event_price': int(event_price),
+                'event_headline': event_headline,
+                'event_details': event_details,
+                'created_by_name': users_profile_info['name'],
+                'created_by_email': users_profile_info['email'],
+                'contact_number': contact_number,
+                'created_id': users_profile_info['localId'],
+                'created_at': created_at,
+            }
         
         event_data = db.child("Created Events").get()
         db.child('Created Events').child(year).child(month).child(
@@ -530,11 +561,12 @@ def event_apply(request):
         #print(users_profile)'''
         users_profile_info = request.session['users_profile_info']
         event_id = str(year)+'-'+str(month)+'-'+str(date)
+
         data = {
             'event_id': event_id,
             'event_name': event_name,
             'email': users_profile_info['email'],
-            'username': users_profile_info['username'],
+            'name': users_profile_info['name'],
             'contact_number': users_profile_info['contact_number'],
             #'last_name': users_profile['last_name'],
             #'contact_number': users_profile['contact_number'],
@@ -549,7 +581,7 @@ def event_apply(request):
         db.child('Created Events').child(year).child(month).child(date).child(
             event_name).child('Registered').child(localId).update(data)
         users_db = db.child("users_profile").get()
-        db.child("users_profile").child(localId).child('details').update(data)
+        db.child("users_profile").child(localId).child('details').child('registered_events').update(data)
         return HttpResponseRedirect('/')
 
     else:
@@ -579,65 +611,76 @@ def info(request):
         request.session['date'] = date
         request.session['event_name'] = event_name
 
-        if(ev_submit == "info"):
-            event_venue = request.POST.get('event_venue')
-            contact_number = request.POST.get('contact_number')
-            created_at = request.POST.get('created_at')
-            created_by = request.POST.get('created_by')
-            event_details = request.POST.get('event_details')
-            event_headline = request.POST.get('event_headline')
-            event_price = request.POST.get('event_price')
-            event_time = request.POST.get('event_time')
-            img_event_url = request.POST.get('img_event_url')
-            month_str = request.POST.get('month_str')
-            tag = request.POST.get('tag')
-            event_app_list = request.session['event_app_list']
-            
-            event_det_list = event_details.split('.')
-            
-            print(event_det_list)
-            found = 0
-            event_id = str(str(year)+'-'+str(month)+'-'+str(date))
-            print("info")
-            print(event_app_list)
-            print(event_id)
-            for i in event_app_list:
-                if i == "example@gmail.com":
-                    pass
-                elif i['event_id'] == str(event_id):
-                    found = 1
-                    break
-                
-                else:
-                    found = 0
-            request.session['found'] = found
-            try:
-                users_profile_info = request.session['users_profile_info']
+        #if(ev_submit == "info"):
+        event_venue = request.POST.get('event_venue')
+        contact_number = request.POST.get('contact_number')
+        created_at = request.POST.get('created_at')
+        created_by_name = request.POST.get('created_by_name')
+        created_by_email = request.POST.get('created_by_email')
+        event_details = request.POST.get('event_details')
+        event_headline = request.POST.get('event_headline')
+        event_price = request.POST.get('event_price')
+        event_time = request.POST.get('event_time')
+        img_event_url = request.POST.get('img_event_url')
+        month_str = request.POST.get('month_str')
+        tag = request.POST.get('tag')
+        alt_name = request.POST.get('alt_name')
+        alt_email = request.POST.get('alt_email')
+        alt_contact = request.POST.get('alt_contact')
+        event_app_list = request.session['event_app_list']
+        
+        event_det_list = event_details.split('.')
+        
+        print(event_det_list)
+        found = 0
+        event_id = str(str(year)+'-'+str(month)+'-'+str(date))
+        print("info")
+        print(event_app_list)
+        print(event_id)
+        for i in event_app_list:
+            if i == "example@gmail.com":
+                pass
+            elif i['event_id'] == str(event_id):
+                found = 1
+                break
+            else:
+                found = 0
+        request.session['found'] = found
+        try:
+            users_profile_info = request.session['users_profile_info']
+            return render(request, 'events/info.html', {'contact_number': contact_number,
+                                                        'created_at': created_at,
+                                                        'created_by_email': created_by_email,
+                                                        'created_by_name':created_by_name,
+                                                        'date': date,
+                                                        'alt_name':alt_name,
+                                                        'alt_email':alt_email,
+                                                        'alt_contact':alt_contact,
+                                                        'event_details': event_det_list,
+                                                        'event_headline': event_headline,
+                                                        'event_name': event_name,
+                                                        'event_price': int(event_price),
+                                                        'event_time': event_time,
+                                                        'event_venue': event_venue,
+                                                        'img_event_url': img_event_url,
+                                                        'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list, 'user': users_profile_info,'found':found})
+        except:
                 return render(request, 'events/info.html', {'contact_number': contact_number,
-                                                            'created_at': created_at,
-                                                            'created_by': created_by,
-                                                            'date': date,
-                                                            'event_details': event_det_list,
-                                                            'event_headline': event_headline,
-                                                            'event_name': event_name,
-                                                            'event_price': int(event_price),
-                                                            'event_time': event_time,
-                                                            'event_venue': event_venue,
-                                                            'img_event_url': img_event_url,
-                                                            'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list, 'user': users_profile_info,'found':found})
-            except:
-                    return render(request, 'events/info.html', {'contact_number': contact_number,
-                                                            'created_at': created_at,
-                                                            'created_by': created_by,
-                                                            'date': date,
-                                                            'event_details': event_det_list,
-                                                            'event_headline': event_headline,
-                                                            'event_name': event_name,
-                                                            'event_price': int(event_price),
-                                                            'event_time': event_time,
-                                                            'event_venue': event_venue,
-                                                            'img_event_url': img_event_url,
-                                                            'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list,'found':found})
+                                                        'created_at': created_at,
+                                                        'created_by_name':created_by_name,
+                                                        'created_by_email': created_by_email,
+                                                        'date': date,
+                                                        'alt_name':alt_name,
+                                                        'alt_email':alt_email,
+                                                        'alt_contact':alt_contact,
+                                                        'event_details': event_det_list,
+                                                        'event_headline': event_headline,
+                                                        'event_name': event_name,
+                                                        'event_price': int(event_price),
+                                                        'event_time': event_time,
+                                                        'event_venue': event_venue,
+                                                        'img_event_url': img_event_url,
+                                                        'month': month, 'month_str': month_str, 'tag': tag, 'year': year, 'event_app_list': event_app_list,'found':found})
 
     else:
         return HttpResponseRedirect('/')
