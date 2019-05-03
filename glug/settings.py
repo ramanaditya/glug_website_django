@@ -84,11 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'OPTIONS': {
-            'timeout': 0,  # in seconds
-            # see also
-            # https://docs.python.org/3.7/library/sqlite3.html#sqlite3.connect
-        }
+        
     }
 }
 
@@ -140,5 +136,4 @@ MEDIA_URL = '/media/'
 import django_heroku
 django_heroku.settings(locals())
 
-from django import db
-db.connections.close_all()
+SESSIONS_ENGINE = 'django.contrib.sessions.backends.file'
