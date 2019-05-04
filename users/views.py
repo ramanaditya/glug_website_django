@@ -31,7 +31,7 @@ config = {
     'projectId': os.environ.get('PROJECT_ID', ''),
     'storageBucket': os.environ.get('STORAGE_BUCKET', ''),
     'messagingSenderId': os.environ.get('messagingSenderId', ''),
-    'serviceAccount': "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json",
+    'serviceAccount': "glugmvit-web-firebase-adminsdk-9bz9b-0b162e3c22.json",
 }
 firebase = pyrebase.initialize_app(config)
 authe = firebase.auth()
