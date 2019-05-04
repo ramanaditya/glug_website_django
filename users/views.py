@@ -25,12 +25,12 @@ serviceAccount = os.path.join(
     BASE_DIRS, "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
 
 config = {
-    'apiKey': "AIzaSyBmZkSULfm_sKjeQW646OyEUAU_DHCLdEw",
-    'authDomain': "glugmvit-web.firebaseapp.com",
-    'databaseURL': "https://glugmvit-web.firebaseio.com",
-    'projectId': "glugmvit-web",
-    'storageBucket': "glugmvit-web.appspot.com",
-    'messagingSenderId': "198252493",
+    'apiKey': os.environ.get('APIKEY', ''),
+    'authDomain': os.environ.get('AUTHDOMAIN', ''),
+    'databaseURL': os.environ.get('DATA_BASE_URL', ''),
+    'projectId': os.environ.get('PROJECT_ID', ''),
+    'storageBucket': os.environ.get('STORAGE_BUCKET', ''),
+    'messagingSenderId': os.environ.get('messagingSenderId', ''),
     'serviceAccount': "glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json",
 }
 firebase = pyrebase.initialize_app(config)
