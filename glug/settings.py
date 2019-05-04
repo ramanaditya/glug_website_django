@@ -21,7 +21,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates/')
 # 
 # test
 
-GOOGLE_APPLICATION_CREDENTIALS=os.path.join(BASE_DIR,"glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
+#GOOGLE_APPLICATION_CREDENTIALS=os.path.join(BASE_DIR,"glugmvit-web-firebase-adminsdk-fcfa3-d4143f72cc.json")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
