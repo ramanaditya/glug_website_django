@@ -32,10 +32,10 @@
                 {% csrf_token %}
                   <div class="form-group row">
                     <div class="col-md-6 mb-3 mb-lg-0">
-                      <input type="text" class="form-control" name="first_name" placeholder="{{ user.first_name }}" />
+                      <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" />
                     </div>
                     <div class="col-md-6">
-                      <input type="text" class="form-control" name="last_name" placeholder="{{ user.last_name }}">
+                      <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -48,19 +48,19 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-md-4 mb-3 mb-lg-0">
-                      <input type="text" name="dob" class="form-control datepicker" {% if user.dob %} placeholder="{{ user.dob }}"{% else %} placeholder="Date of Birth"{% endif %} >
+                      <input type="text" name="dob" class="form-control datepicker" {% if user.dob %} value="{{ user.dob }}"{% else %} placeholder="Date of Birth"{% endif %} >
                     </div>
                     <div class="col-md-4">
-                      <input type="text" name="usn" class="form-control" {% if user.usn %} placeholder="{{ user.usn }}"{% else %} placeholder="Enter your USN" {% endif %}>
+                      <input type="text" name="usn" class="form-control" {% if user.usn %} value="{{ user.usn }}"{% else %} placeholder="Enter your USN" {% endif %}>
                     </div>
                     <div class="col-md-4">
-                      <input type="text" name="sem" class="form-control" {% if user.sem %} placeholder="{{ user.sem }}"{% else %}  placeholder="Enter your Sem" {% endif %}>
+                      <input type="text" name="sem" class="form-control" {% if user.sem %} value="{{ user.sem }}"{% else %}  placeholder="Enter your Sem" {% endif %}>
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <textarea class="form-control" name="desc" cols="30" rows="10" placeholder="Describe Yourself"></textarea>
-                    </div>
+                      <textarea class="form-control" name="desc" cols="30" rows="10" {% if user.sem %} value="{{ user.desc }}" {% endif %} placeholder="Describe Yourself"></textarea>
+                    </div>value
                   </div>
                   <!--
                   <div class="form-group row">
@@ -72,12 +72,12 @@
 
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <input type="text" name="email" class="form-control" placeholder="{{ user.email }}" disabled/>
+                      <input type="text" name="email" class="form-control" value="{{ user.email }}" disabled/>
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <input type="number" name="contact_number" class="form-control" placeholder="{{ user.contact_number }}" disabled/>
+                      <input type="number" name="contact_number" class="form-control" value="{{ user.contact_number }}" disabled/>
                     </div>
                   </div>
                   <div class="form-group row">
