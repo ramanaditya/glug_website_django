@@ -17,6 +17,7 @@ urlpatterns = [
 	path('dashboard/', views.dashboard, name="dashboard"),
 	path('info/',views.info, name="info"),
 	path('resetpassword/',views.resetpassword,name="resetpassword"),
+	path('forgotpassword/',views.forgotpassword,name="forgotpassword"),
 	
 ]
 

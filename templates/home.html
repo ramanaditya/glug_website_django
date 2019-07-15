@@ -102,7 +102,7 @@
                       <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-pill" target="{% url 'users:login' %}" value="Login">
                       </div>
-                      <!--<a href="{% url 'users:resetpassword'%}"><p style="color:blue;">Forgot Password &nbsp;<span class="icon-error_outline" style="color:red;"></span></p>-->
+                      <a href="{% url 'users:forgotpassword' %}"><p style="color:blue;">Forgot Password &nbsp;<span class="icon-error_outline" style="color:red;"></span></p></a>
                     </form>
                   </div>
                   {% endif %}
@@ -772,6 +772,34 @@
           </div>
           <div class="col-lg-7 align-self-end"  data-aos="fade-left" data-aos-delay="200">
             <img src="/static/images/person_transparent.png" alt="Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section overlay" style="background-color: #f7f7f7;">
+      <div class="container">
+       <div class="row justify-content-center align-items-center">
+          <div class="col-md-12 text-center testimony">
+            <h1 class="mb-6">PARTNERS</h1><br>
+          </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <div class="col-md-3 text-center testimony">
+            <img src="/static/images/MSP_logo.jpeg" alt="Image" class="img-fluid w-75 mb-4 ">
+            <img src="/static/images/MSP_word.jpeg" alt="Image" class="img-fluid w-75 mb-4 ">
+          </div>
+          <div class="col-md-1 text-center testimony">
+            <p></p>
+          </div>
+          <div class="col-md-3 text-center testimony">
+            <img src="/static/images/mozilla_india.png" alt="Image" class="img-fluid mb-4">
+          </div>
+          <div class="col-md-1 text-center testimony">
+            <p></p>
+          </div>
+          <div class="col-md-3 text-center testimony">
+            <img src="/static/images/mlh.png" alt="Image" class="img-fluid mb-4">
           </div>
         </div>
       </div>

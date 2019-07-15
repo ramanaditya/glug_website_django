@@ -762,3 +762,11 @@ def resetpassword(request):
     authe.send_password_reset_email(users_profile_info['email'])
     auth.logout(request)
     return HttpResponseRedirect('/')
+
+def forgotpassword(request):
+    if request.method == "POST":
+        forgot_email = request.POST.get('forgot_email')
+        authe.send_password_reset_email(forgot_email)
+        return HttpResponseRedirect('/')
+    else:
+        return render(request, 'users/forgotpassword.html')
