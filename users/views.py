@@ -45,25 +45,16 @@ firebase_admin.initialize_app(cred, {
 # Create your views here
 # .
 def home(request):
-    #print("Hello")
     time = now.strftime("%Y-%m-%d %H:%M")
     try:
         localId = request.session['localId']
         user_db = db.child('users_profile').child(localId).get()
         user_list = []
         users_profile_info = []
-        #print(user_db)
         for per in user_db.each():
             user_list.append(per.val())
-        #print(user_list)
-        #for person in user_list:
-        #    users_profile.append(person['details'])
         users_profile_info = user_list[0]
-        #users_profile = request.session['users_profile']
         request.session['users_profile_info'] = users_profile_info
-        #print(users_profile)
-        #request.session['users_profile'] = users_profile
-        #print("End")
     except:
         users_profile_info = {"username": 'username', "verified": 0,
                          'email': 'email', 'password': 'password','registered':0}
@@ -71,10 +62,7 @@ def home(request):
     if request.method == "POST":
         value = request.POST.get('sub_mit')
         try:
-            #user = ""
             event_data = db.child("Created Events").get()
-            #event_data.update({'ram':'boy'})
-            #print(event_data)
             year_list = []
             event_detail = []
             event_reg_can = []
@@ -82,11 +70,7 @@ def home(request):
 
             for year in event_data.each():
                 year_list.append(year.val())
-            #print(year_list)
-            #print(users_profile['localId'])
             for year in year_list:
-                #print(text)
-                #print(type(text))
                 for month in year.values():
                     for date in month.values():
                         for name in date.values():
@@ -94,28 +78,17 @@ def home(request):
                                 if k == 'details':
                                     event_detail.append(detail)
                                 elif k == 'Registered':
-                                    #print(k)
-                                    #print(detail.values())
                                     for i, j in detail.items():
-                                        #print('i','j')
-                                        #print(i,j)
                                         event_app_list.append(j['email'])
                                         try:
                                             users_profile_info = request.session['users_profile_info']
                                             if i == users_profile_info['localId']:
-                                                #print("Iniside lop")
-                                                #print(users_profile_info['localId'])
                                                 event_reg_can.append(j)
                                                 
                                         except:
-                                            #print('elase')
                                             pass
                                 else:
                                     pass
-                        #print(x)
-            #print(event_detail)
-            #print(event_reg_can)
-            #print(event_app_list)
             event_app_list.append('example@gmail.com')
             request.session['event_app_list'] = event_app_list
             try:
@@ -126,22 +99,8 @@ def home(request):
                     "details").child("Event Registered").child(data['event_id']).update(data)
             except:
                 pass
-
-            '''for i in event_reg_can:
-                for j,k in i.items():
-                    if k == users_profile['email']:
-                        data[j] = k
-                    else:
-                        pass'''
-            #print("here")
-
-            #print(event_reg_can)
-            #event_detail = [{'count': 1, 'created_by': 'adityaraman96@gmail.com', 'created_id': 'OLD7v4aC7KPeUFrXPaSDywWU2Cx2', 'event_date': 'event_date','event_details': 'event_details', 'event_name': 'event_name', 'event_price': 'event_price', 'event_time': 'event_time', 'event_venue': 'event_venue', 'tag': 'ml'}]
             event_reg_can_count = len(event_reg_can)
             event_detail_count = len(event_detail)
-            #request.session['event_reg_can_count'] = event_reg_can_count
-            #request.session['event_detail'] = event_detail\
-            #print("End")
         except:
             #print("event_detail in except")
             event_detail = [{
@@ -160,27 +119,18 @@ def home(request):
                 "month": 4,
                 "month_str": "Apr",
                 "tag": ["App", "Web"],
-                "year": 2019
+                "year": 2019,
+                "event_website": ""
             }]
             event_detail_count = 0
             event_reg_can_count = 0
             event_reg_can = 0
         if users_profile_info['registered']:
-            #user = request.session['user']
-            #print(user)
-            #print("index")
-            #print(user['email'],user['registered'])
-            #user = user
-
-            #idtoken = request.session['uid']
-            #a = authe.get_account_info(idtoken)
             if value == 'Create Event':
                 value = 3
             if value == 'Open Project':
                 value = 4
-            #print("If try")
             user_f = {'registered': True}
-            #print(user)
             return render(request, 'home.html', {'value': value, 'user': users_profile_info, 'user_f': user_f['registered'], 'event_detail': event_detail, 'time': time, 'event_detail_count': event_detail_count, 'event_reg_can': event_reg_can, 'event_reg_can_count': event_reg_can_count, 'event_app_list': event_app_list})
 
         else:
@@ -189,14 +139,10 @@ def home(request):
             if value == "Login":
                 value = 2
             user_f = {'registered': False}
-            #print("If Except")
             return render(request, 'home.html', {'value': value, 'user': "", 'user_f': user_f['registered'], 'event_detail': "", 'time': time, 'event_detail_count': event_detail_count, 'event_reg_can': event_reg_can, 'event_reg_can_count': event_reg_can_count})
     else:
         try:
-            #user = ""
-            #event_data = db.child("Created Events").get()
             event_data = db.child("Created Events").get()
-            #print(event_data)
             year_list = []
             event_detail = []
             event_reg_can = []
@@ -204,11 +150,7 @@ def home(request):
             user_reg_dict = {}
             for year in event_data.each():
                 year_list.append(year.val())
-            #print(year_list)
-            #print(users_profile['localId'])
             for year in year_list:
-                #print(text)
-                #print(type(text))
                 for month in year.values():
                     for date in month.values():
                         for name in date.values():
@@ -216,32 +158,18 @@ def home(request):
                                 if k == 'details':
                                     event_detail.append(detail)
                                 elif k == 'Registered':
-                                    #print(k)
-                                    #print(detail.values())
                                     for i, j in detail.items():
-                                        #print('i','j')
-                                        #print(i,j)
-                                        #event_app_list.append(j['email'])
                                         try:
                                             users_profile_info = request.session['users_profile_info']
                                             if i == users_profile_info['localId']:
-                                                #print(users_profile_info['localId'])
                                                 user_reg_dict = j
-                                                #print(user_reg_dict)
                                                 event_reg_can.append(user_reg_dict)
                                                 
                                         except:
-                                            #print('elase')
-                                            
                                             pass
                                 else:
                                     pass
-                        #print(x)
-                #print(event_detail)
             event_reg_can.append('example@gmail.com')
-            #print("list")
-            #print(event_reg_can)
-            #print(event_app_list)
             request.session['event_app_list'] = event_reg_can
             try:
                 for i in event_reg_can:
@@ -252,23 +180,9 @@ def home(request):
                     "details").child("Event Registered").child(data['event_id']).update(data)
             except:
                 pass
-
-            '''for i in event_reg_can:
-                for j,k in i.items():
-                    if k == users_profile['email']:
-                        data[j] = k
-                    else:
-                        pass'''
-            #print("here")
-
-            #print(event_reg_can)
-            #event_detail = [{'count': 1, 'created_by': 'adityaraman96@gmail.com', 'created_id': 'OLD7v4aC7KPeUFrXPaSDywWU2Cx2', 'event_date': 'event_date','event_details': 'event_details', 'event_name': 'event_name', 'event_price': 'event_price', 'event_time': 'event_time', 'event_venue': 'event_venue', 'tag': 'ml'}]
             event_reg_can_count = len(event_reg_can)
             event_detail_count = len(event_detail)
-            #request.session['event_reg_can_count'] = event_reg_can_count
-            #request.session['event_detail'] = event_detail
         except:
-            #print("event_detail in except")
             event_detail = [{
                 "contact_number": "9901",
                 "created_at": "2019-04-28 23:19",
@@ -285,26 +199,20 @@ def home(request):
                 "month": 4,
                 "month_str": "Apr",
                 "tag": ["App", "Web"],
-                "year": 2019
+                "year": 2019,
+                "event_website": ""
             }]
             event_app_list = []
             event_detail_count = 0
             event_reg_can_count = 0
             event_reg_can = 0
         if users_profile_info['registered']:
-            #if users_profile['registered']:
-            #user = request.session['user']
             value = 0
-            #user = users_profile
-            #print("Else try")
-            #print(users_profile['registered'])
             user_f = {'registered': True}
             return render(request, 'home.html', {'value': value, 'user': users_profile_info, 'user_f': user_f['registered'], 'event_detail': event_detail, 'time': time, 'event_detail_count': event_detail_count, 'event_reg_can': event_reg_can, 'event_reg_can_count': event_reg_can_count, 'event_app_list': event_app_list})
         else:
-            #print("Else Except")
             value = 2
             user_f = {'registered': False}
-            #print(user_f['registered'])
             return render(request, 'home.html', {'value': value, 'user_f': user_f['registered'], 'event_detail': event_detail, 'time': time, 'event_detail_count': event_detail_count, 'event_reg_can': event_reg_can, 'event_reg_can_count': event_reg_can_count})
 
 
@@ -320,29 +228,14 @@ def login(request):
             #request.session['user'] = user
             localId = user['localId']
             request.session['localId'] = localId
-            #print(localId)
-            #print(a)
-            #print(user['email'])
-            #print(user)
-            '''data = {}
-            for i,j in user.items():
-                data[i] = j
-            db.child('users_profile').child(localId).child('details').update(data)'''
-            #print("login")
             data = {'emailVerified':a['users'][0]['emailVerified']}
-            
-            #print(data)
             db.child('users_profile').child(localId).child('details').update(data)
             authe.refresh(user['refreshToken'])
-
-            #request.session['users_profile'] = users_profile
             return HttpResponseRedirect("/")
         except:
             message = "invalid credentials"
-            #print(message)
             return HttpResponseRedirect("/", {'msg': message})
     else:
-        #print("Not login")
         return HttpResponseRedirect("/")
 
 
@@ -363,63 +256,34 @@ def register(request):
 
                 uid = new_user['localId']
                 data1 = {"first_name": first_name,'last_name':last_name,'name':name,'password':password,'contact_number':contact_number, "verified": 0,'email': new_user['email'],'admin':0,'member':1,'superuser':0}
-                '''db.child("users_profile").child(uid).child("details").update(data)'''
-                #print("Registered")
                 user = authe.sign_in_with_email_and_password(email, password)
                 a = authe.get_account_info(user['idToken'])
                 session_id = user['idToken']
                 request.session['uid'] = str(session_id)
-                #request.session['user'] = user
                 localId = user['localId']
                 request.session['localId'] = localId
-                #print(localId)
-                #print(a)
-                #print(user['email'])
-                #print(user)
                 data2 = {}
                 for i, j in user.items():
                     data2[i] = j
-                '''z = db.child('users_profile').child(
-                    localId).child('details').update(data_1)'''
-                #print("login")
                 data = {}
                 for i, j in a.items():
-                    #print(i, j)
                     if i == 'users':
                         for m, n in j[0].items():
-                            #print(m, n)
                             if m == "providerUserInfo":
                                 for p, q in n[0].items():
-                                    #print(p, q)
                                     data[p] = q
                             else:
                                 data[m] = n
                     else:
                         data[i] = j
-                #print("DAta 1")
-                #print(data1)
-                #print("Data 2")
-                #print(data2)
                 data.update(data1)
                 data.update(data2)
-                #print(data)
                 authe.refresh(user['refreshToken'])
                 localId = request.session['localId']
                 y = db.child('users_profile').child(localId).child('details').update(data)
                 authe.refresh(user['refreshToken'])
-
-
-                '''print(new_user)
-                print(user)
-               
-                authe.get_account_info(user_login['idToken'])
-                session_id = user['idToken']
-                request.session['uid'] = str(session_id)
-                request.session['user'] = user_login'''
-                #print("last register")
                 return HttpResponseRedirect("/")
             except:
-                #print("Error")
                 message = "Unable to create account try again"
                 return render(request, "register.html", {"msg": message})
         else:
@@ -427,12 +291,15 @@ def register(request):
             return render(request, "register.html", {"msg": message})
     else:
         return render(request, "register.html")
-#creating
+# Event Creating
 def event_create(request):
     if request.method == "POST":
         users_profile_info = request.session['users_profile_info']
         tag = request.POST.get('tag')
-        
+        try:
+            event_website = request.POST.get('event_website')
+        except:
+            event_website = ""
         try:
             img_event = request.FILES['img_event']
             fs = FileSystemStorage()
@@ -440,7 +307,6 @@ def event_create(request):
             img_event_url = fs.url(filename)
         except:
             img_event_url = ""
-        #print(img_event)
         tag = tag.split(",")
         event_name = request.POST.get('event_name')
         event_date = request.POST.get('event_date')
@@ -459,11 +325,6 @@ def event_create(request):
         alt_name = request.POST.get('alt_name')
         alt_email = request.POST.get('alt_email')
         alt_contact = request.POST.get('alt_contact')
-
-        #idtoken = request.session['uid']
-        #a = authe.get_account_info(idtoken)
-        #a = a['users'][0]
-        #a = a['localId']
         created_at = time
         try:
             data = {
@@ -487,6 +348,7 @@ def event_create(request):
                 'alt_name':alt_name,
                 'alt_email':alt_email,
                 'alt_contact':alt_contact,
+                'event_website': event_website,
             }
         except:
             data = {
@@ -507,6 +369,7 @@ def event_create(request):
                 'contact_number': contact_number,
                 'created_id': users_profile_info['localId'],
                 'created_at': created_at,
+                'event_website': event_website,
             }
         
         event_data = db.child("Created Events").get()
@@ -516,8 +379,6 @@ def event_create(request):
 
     else:
         users_profile_info = request.session['users_profile_info']
-        #event_app_list = request.session['event_app_list']
-        #event_detail = request.session['event_detail']
         return render(request, 'event_create.html', {'user': users_profile_info})
 
 
@@ -530,36 +391,12 @@ def logout(request):
 def cancel(request):
     return HttpResponseRedirect('/')
 
-
 def event_apply(request):
     if request.method == "POST":
         year = request.POST.get('year')
         month = request.POST.get('month')
         date = request.POST.get('date')
         event_name = request.POST.get('event_name')
-
-        
-        #ev_submit = request.POST.get('ev_submit')
-        #event_reg_can_count = request.session['event_reg_can_count']
-        #event_reg_can_count = str(int(event_reg_can_count + 1))
-        #my_dict = {}
-        #event_dict = request.POST.get('event_dict')
-
-        #print("Dict")
-        #print(event_dict)
-    
-        #users_profile = request.session['users_profile']
-        #email = users_profile['email']
-        '''event_detail = request.session['event_detail']
-        user_db = db.child('users_profile').get()
-        user_list = []
-        users_profiel = []
-        for per in user_db.each():
-            user_list.append(per.val())
-        print(user_list)
-        for person in user_list:
-            users_profile.append(person)
-        #print(users_profile)'''
         users_profile_info = request.session['users_profile_info']
         event_id = str(year)+'-'+str(month)+'-'+str(date)
         name = users_profile_info['first_name'] + str(' ') + users_profile_info['last_name']
@@ -569,14 +406,8 @@ def event_apply(request):
             'email': users_profile_info['email'],
             'name': name,
             'contact_number': users_profile_info['contact_number'],
-            #'last_name': users_profile['last_name'],
-            #'contact_number': users_profile['contact_number'],
-            #'username': users_profile['username'],
         }
-        #uid = user['localId']
         event_app_list = request.session['event_app_list']
-        #print("USERS PROFILE")
-        #print(users_profile_info)
         localId = request.session['localId']
         event_data = db.child("Created Events").get()
         db.child('Created Events').child(year).child(month).child(date).child(
@@ -611,8 +442,6 @@ def info(request):
         request.session['month'] = month
         request.session['date'] = date
         request.session['event_name'] = event_name
-
-        #if(ev_submit == "info"):
         event_venue = request.POST.get('event_venue')
         contact_number = request.POST.get('contact_number')
         created_at = request.POST.get('created_at')
@@ -631,13 +460,8 @@ def info(request):
         event_app_list = request.session['event_app_list']
         
         event_det_list = event_details.split('.')
-        
-        #print(event_det_list)
         found = 0
         event_id = str(str(year)+'-'+str(month)+'-'+str(date))
-        #print("info")
-        #print(event_app_list)
-        #print(event_id)
         for i in event_app_list:
             if i == "example@gmail.com":
                 pass
@@ -718,7 +542,6 @@ def dashboard_edit(request):
             'usn':usn,
             'sem':sem,
             'desc':desc,
-            #'email':email,
             'contact_number':contact_number,
         }
         localId = request.session['localId']
@@ -727,16 +550,9 @@ def dashboard_edit(request):
         user_db = db.child('users_profile').child(localId).get()
         user_list = []
         users_profile_info = []
-        #print(user_db)
         for per in user_db.each():
             user_list.append(per.val())
-        #print(user_list)
-        #for person in user_list:
-        #    users_profile.append(person['details'])
         users_profile_info = user_list[0]
-        #users_profile = request.session['users_profile']
-        #request.session['users_profile'] = users_profile
-        #print(users_profile)
         return render(request, 'users/dashboard.html',{'user':users_profile_info})
     else:
         users_profile_info = request.session['users_profile_info']
@@ -749,9 +565,6 @@ def dashboard(request):
     total_user_count = 0
     for person in count_db.each():
         total_user_count += 1
-    #print("Count")
-    #print(total_user_count)
-    #print(users_profile_info)
     if request.method == "POST":
         return HttpResponseRedirect( '/')
     else:
@@ -770,3 +583,4 @@ def forgotpassword(request):
         return HttpResponseRedirect('/')
     else:
         return render(request, 'users/forgotpassword.html')
+
