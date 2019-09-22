@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
     
-    <div class="hero-wrap" style="background-image: url('/static/images/ai-gaming/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div id="home" class="hero-wrap" style="background-image: url('/static/images/ai-gaming/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
@@ -101,9 +101,12 @@
 		            <h2 class="mb-4">What is all about us?</h2>
 	            </div>
 
-	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-	            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-	            <p><a href="#" class="btn btn-primary">Join now</a></p>
+	            <p>On Saturday, 5th October 2019, we are going to host Microsoft Minihack: AI Gaming, powered by Microsoft and Subway. Microsoft events are free, out-of-the-box workshops covering today’s most relevant technology so you can share knowledge with your community, spend less time on content, and learn as you go.
+
+There will be a workshop followed by a mini-hackathon on the concepts covered in the workshop. The event is suitable for both beginners as well as experienced programmers.
+
+This 10 minute video from SciShow will bring you right up to date on how an AI can play a game:</p>
+	            <p><a href="https://forms.gle/zg3726edzmmnusZE7" class="btn btn-primary">Join now</a></p>
 	          </div>
 					</div>
 				</div>
@@ -111,7 +114,7 @@
 		</section>
 
 
-		<section class="ftco-section">
+		<section class="ftco-section" id="schedule">
 			<div class="container">
 				<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -124,9 +127,9 @@
 	            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 	              <a class="nav-link ftco-animate active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Workshop <span>05 Oct 2019</span></a>
 
-	              <a class="nav-link ftco-animate" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Speakers</a>
+	              <!--<a class="nav-link ftco-animate" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Speakers</a>
 
-	              <!--<a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Student Coordinators</a>-->
+	              <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Student Coordinators</a>-->
 
 	            </div>
 	          </div>
@@ -347,7 +350,7 @@
     	</div>
     </section>
 
-    <section class="ftco-section testimony-section ftco-no-pt">
+    <!--<section class="ftco-section testimony-section ftco-no-pt">
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -416,7 +419,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
 
 
     <!--<section class="ftco-section ftco-no-pt">
@@ -501,7 +504,7 @@
     </section>-->
 
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
+    <section class="ftco-section ftco-no-pt ftco-no-pb" id="speakers">
     	<div class="container">
     		<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -536,70 +539,55 @@
 	        			<ul class="ftco-social">
 	                <li><a href="https://twitter.com/_adityaraman"><span class="icon-twitter"></span></a></li>
 					<li><a href="https://ramanaditya.github.io"><span class="icon-link2"></span></a></li>
-	                <li><a href="https://www.facebook.com/adityaraman6"><span class="icon-facebook"></span></a></li>
-	                <li><a href="https://www.instagram.com/_adityaraman/"><span class="icon-instagram"></span></a></li>
 					<li><a href="https://github.com/ramanaditya"><span class="icon-github"></span></a></li>
 					<li><a href="https://www.linkedin.com/in/ramanaditya/"><span class="icon-linkedin"></span></a></li>
 	              </ul>
 	        		</div>
 	        	</div>
 	        	<div class="speaker ftco-animate speaker-1 d-flex align-items-center mb-5">
-	        		<div class="img" style="background-image: url(images/staff-2.jpg);"></div>
+	        		<div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/29686866?s=400&v=4');"></div>
 	        		<div class="text pl-4">
 	        			<h3>Abhijeet Singh</h3>
 	        			<span class="position">Microsoft Student Partner</span>
 	        			<p></p>
 	        			<ul class="ftco-social">
-	                <li><a href="#"><span class="icon-twitter"></span></a></li>
-					<li><a href="#"><span class="icon-link2"></span></a></li>
-	                <li><a href="#"><span class="icon-facebook"></span></a></li>
-	                <li><a href="#"><span class="icon-instagram"></span></a></li>
-					<li><a href="#"><span class="icon-linkedin"></span></a></li>
+	                <li><a href="https://twitter.com/cse_as"><span class="icon-twitter"></span></a></li>
+					<li><a href="https://www.absingh.com/"><span class="icon-link2"></span></a></li>
+					<li><a href="https://www.linkedin.com/in/thatniceman/"><span class="icon-linkedin"></span></a></li>
 	              </ul>
 	        		</div>
 	        	</div>
 	        	<div class="speaker ftco-animate speaker-1 d-flex align-items-center mb-5">
-	        		<div class="img" style="background-image: url(images/staff-3.jpg);"></div>
+	        		<div class="img" style="background-image: url('https://media.licdn.com/dms/image/C5103AQFu4-b2Zu4Tjg/profile-displayphoto-shrink_200_200/0?e=1574294400&v=beta&t=qceyIF9clu2BEBXDvb4f6MCNMIKSQuYzXLrYVV2tRrM');"></div>
 	        		<div class="text pl-4">
 	        			<h3>Ujjwal Kumar</h3>
 	        			<span class="position">Microsoft Student Partner</span>
 	        			<p></p>
 	        			<ul class="ftco-social">
-	                <li><a href="#"><span class="icon-twitter"></span></a></li>
-					<li><a href="#"><span class="icon-link2"></span></a></li>
-	                <li><a href="#"><span class="icon-facebook"></span></a></li>
-	                <li><a href="#"><span class="icon-instagram"></span></a></li>
-					<li><a href="#"><span class="icon-linkedin"></span></a></li>
+	                <li><a href="https://twitter.com/Ujwal07kumar"><span class="icon-twitter"></span></a></li>
+					<li><a href="https://www.linkedin.com/in/ujwal-kumar-a096b179/"><span class="icon-linkedin"></span></a></li>
 	              </ul>
 	        		</div>
 	        	</div>
 	        	<div class="speaker ftco-animate speaker-1 d-flex align-items-center mb-5">
-	        		<div class="img" style="background-image: url(images/staff-4.jpg);"></div>
+	        		<div class="img" style="background-image: url('https://avatars2.githubusercontent.com/u/38214908?s=460&v=4');"></div>
 	        		<div class="text pl-4">
 	        			<h3>Harsh Gahlot</h3>
 	        			<span class="position">Microsoft Student Partner</span>
 	        			<p></p>
 	        			<ul class="ftco-social">
-	                <li><a href="#"><span class="icon-twitter"></span></a></li>
-					<li><a href="#"><span class="icon-link2"></span></a></li>
-	                <li><a href="#"><span class="icon-facebook"></span></a></li>
-	                <li><a href="#"><span class="icon-instagram"></span></a></li>
-					<li><a href="#"><span class="icon-linkedin"></span></a></li>
+					<li><a href="https://www.linkedin.com/in/hersh257/"><span class="icon-linkedin"></span></a></li>
 	              </ul>
 	        		</div>
 	        	</div>
 				<div class="speaker ftco-animate speaker-1 d-flex align-items-center mb-5">
-	        		<div class="img" style="background-image: url(images/staff-4.jpg);"></div>
+	        		<div class="img" style="background-image: url('https://media.licdn.com/dms/image/C5103AQFrL_foskD70Q/profile-displayphoto-shrink_200_200/0?e=1574899200&v=beta&t=gnLRVdp4lmvxoESXkU7oTXdktFebE_iIZIGRY_guhUQ');"></div>
 	        		<div class="text pl-4">
 	        			<h3>Prabal Gupta</h3>
 	        			<span class="position">Microsoft Student Partner</span>
 	        			<p></p>
 	        			<ul class="ftco-social">
-	                <li><a href="#"><span class="icon-twitter"></span></a></li>
-					<li><a href="#"><span class="icon-link2"></span></a></li>
-	                <li><a href="#"><span class="icon-facebook"></span></a></li>
-	                <li><a href="#"><span class="icon-instagram"></span></a></li>
-					<li><a href="#"><span class="icon-linkedin"></span></a></li>
+					<li><a href="https://www.linkedin.com/in/prabal-gupta-63722b146/"><span class="icon-linkedin"></span></a></li>
 	              </ul>
 	        		</div>
 	        	</div>
@@ -608,7 +596,7 @@
     	</div>
     </section>
 
-    <section class="ftco-section">
+    <!--<section class="ftco-section" id="blog">
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 heading-section text-center ftco-animate">
@@ -663,7 +651,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>-->
 
 
 	<section class="ftco-section">
@@ -684,10 +672,81 @@
           </div>
           <div class="col-md-3 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
-              <img class="block-27" src=https://avatars2.githubusercontent.com/u/42875071?s=400&v=4" width="100%; />
+              <img class="block-27" src="https://avatars2.githubusercontent.com/u/42875071?s=400&v=4" width="100%" />
             </div>
           </div>
           <div class="col-md-3 d-flex ftco-animate">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+	<section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+            <h2>Sponsored By</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center mb-5 d-flex">
+			<div class="col-md-4 d-flex ftco-animate">
+			</div>
+          <div class="col-md-3 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <img class="block-27" src="https://www.subway.com/~/media/Base_English/Images/Branding/subway-logo-new.png?h=44&la=en-IN&w=222&hash=B7BD24BE2BCD2995D02269D3728D90D461FD54BD" width="100%" />
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          </div>
+        </div>
+      </div>
+    </section>
+
+   	
+	<section class="ftco-section contact-section" id="contact">
+      <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+          <div class="col-md-12 mb-4">
+            <h2 class="h3">Contact Information</h2>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-md-5">
+            <p><span>Address:</span> Sir M Visvesvaraya Institute of Technology, Krishnadevarayanagar, Off International Airport Road, Yelahanka, Bangalore 562157</p>
+          </div>
+          <div class="col-md-3">
+            <p><span>Email:</span> <a href="mailto:glugmvit@gmail.com">glugmvit@gmail.com</a></p>
+          </div>
+          <div class="col-md-4">
+            <p><span>Website</span> <a href="https://www.glugmvit.com">www.glugmvit.com</a><br><a href="https://blog.glugmvit.com">blog.glugmvit.com</a></p>
+          </div>
+        </div>
+        <div class="row block-9">
+          <div class="col-md-6 order-md-last d-flex">
+            <form action="https://formspree.io/glugmvit@gmail.com" method="POST" class="bg-light p-5 contact-form">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Subject" required>
+              </div>
+              <div class="form-group">
+                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+              </div>
+            </form>
+          
+          </div>
+
+          <div class="col-md-6 d-flex">
+		  	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4652.424139151481!2d77.60884610332783!3d13.15085529878985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa150c6dea93315c!2sSir%20M.%20Visvesvaraya%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1569147554698!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+          	<!--<div id="map" class="bg-white"></div>-->
           </div>
         </div>
       </div>
